@@ -14,7 +14,6 @@ C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\A
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.xml
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.Core.xml
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Statistics.xml
-C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csprojResolveAssemblyReference.cache
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form1.resources
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Properties.Resources.resources
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csproj.GenerateResource.Cache

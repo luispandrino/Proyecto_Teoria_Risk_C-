@@ -8,14 +8,15 @@ namespace Juego_Risk.UtilitiesClass
 {
     class Pais
     {
-        private string Nombre;
-        private int Tropas;
-        private int Pertenencia;
-        private int Imp;
-        private int P_Asig;
-        private int P_ATK;
-        private int P_Fort;
-        public Pais (string Nombre_Pais, int Tropas, int Pertenece_a, int Importancia, int Prioridad_Asig, int Prioridad_ATK, int Prioridad_Fort)
+        public string Nombre { get; set; }
+        public int Tropas { get; set; }
+        public int Pertenencia { get; set; }
+        public int Imp { get; set; }
+        public int P_Asig { get; set; }
+        public int P_ATK { get; set; }
+        public int P_Fort { get; set; }
+
+        public void AgregarInfo(string Nombre_Pais, int Tropas, int Pertenece_a, int Importancia, int Prioridad_Asig, int Prioridad_ATK, int Prioridad_Fort)
         {
             this.Nombre = Nombre_Pais;
             this.Tropas = Tropas;
@@ -25,5 +26,16 @@ namespace Juego_Risk.UtilitiesClass
             this.P_ATK = Prioridad_ATK;
             this.P_Fort = Prioridad_Fort;
         }
+        public int AsignarNumTropas(int NumTropas)
+        {
+            Tropas = NumTropas;
+            return NumTropas;
+        }
+        public int AsignarPertenencia(int Adueño)
+        {
+            Pertenencia = Adueño;
+            return Adueño;
+        }
+
     }
 }
