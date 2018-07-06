@@ -10,6 +10,7 @@ namespace Juego_Risk.UtilitiesClass
     class Mapa
     {
         int i = 0;
+        int x = 0;
         Pais Afganistan = new Pais();
         Pais Africa_del_Norte = new Pais();
         Pais Africa_Oriental = new Pais();
@@ -54,7 +55,9 @@ namespace Juego_Risk.UtilitiesClass
         Pais Yakutsk = new Pais();
 
         List<Pais> Lista_Paises = new List<Pais>();
-        
+        List<Pais> Jugador = new List<Pais>();
+        List<Pais> IA = new List<Pais>();
+        Random Num = new Random();
         public Mapa()
         {
             //se ingresa la informacion de cada pais
@@ -148,18 +151,46 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        public string Mostrar()
+        public string MostrarJugador()
         {
-            while( i != 42)
+            while( i != 8)
             {
+                string nombre =  Jugador[i].Nombre;
                 i++;
-                return Lista_Paises[i].Nombre;
+                return nombre;
                 
             }           
             return "ultima Linea";
         }
-       
-      
+        public string MostrarIA()
+        {
+            while (x != 8)
+            {
+                string nombre = IA[x].Nombre;
+                x++;
+                return nombre;
+
+            }
+            return "ultima Linea";
+        }
+
+
+        public void AsignarJugador()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Jugador.Add(Lista_Paises[Num.Next(0, 41)]);
+            }
+        }
+        public void AsignarIA()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                IA.Add(Lista_Paises[Num.Next(0, 41)]);
+            }
+        }
+
+
     }
     
 }

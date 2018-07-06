@@ -71,10 +71,13 @@
             this.Btn_AustraliaOriental = new System.Windows.Forms.Button();
             this.Btn_Indonecia = new System.Windows.Forms.Button();
             this.Btn_NuevaGuinea = new System.Windows.Forms.Button();
-            this.LstBox_Paises = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Btn_Empezar = new System.Windows.Forms.PictureBox();
+            this.CB_jugador = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CB_IA = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -541,14 +544,6 @@
             this.Btn_NuevaGuinea.Text = "0";
             this.Btn_NuevaGuinea.UseVisualStyleBackColor = false;
             // 
-            // LstBox_Paises
-            // 
-            this.LstBox_Paises.FormattingEnabled = true;
-            this.LstBox_Paises.Location = new System.Drawing.Point(12, 128);
-            this.LstBox_Paises.Name = "LstBox_Paises";
-            this.LstBox_Paises.Size = new System.Drawing.Size(124, 355);
-            this.LstBox_Paises.TabIndex = 62;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -583,6 +578,40 @@
             this.Btn_Empezar.TabStop = false;
             this.Btn_Empezar.Click += new System.EventHandler(this.Btn_Empezar_Click);
             // 
+            // CB_jugador
+            // 
+            this.CB_jugador.FormattingEnabled = true;
+            this.CB_jugador.Location = new System.Drawing.Point(26, 168);
+            this.CB_jugador.Name = "CB_jugador";
+            this.CB_jugador.Size = new System.Drawing.Size(121, 21);
+            this.CB_jugador.TabIndex = 65;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(26, 146);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.TabIndex = 66;
+            this.label3.Text = "Paises Jugador";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(29, 209);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 67;
+            this.label4.Text = "Paises IA";
+            // 
+            // CB_IA
+            // 
+            this.CB_IA.FormattingEnabled = true;
+            this.CB_IA.Location = new System.Drawing.Point(26, 237);
+            this.CB_IA.Name = "CB_IA";
+            this.CB_IA.Size = new System.Drawing.Size(121, 21);
+            this.CB_IA.TabIndex = 68;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -591,9 +620,12 @@
             this.BackgroundImage = global::Juego_Risk.Properties.Resources.Mapa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1202, 552);
+            this.Controls.Add(this.CB_IA);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CB_jugador);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Btn_Empezar);
-            this.Controls.Add(this.LstBox_Paises);
             this.Controls.Add(this.Btn_NuevaGuinea);
             this.Controls.Add(this.Btn_Indonecia);
             this.Controls.Add(this.Btn_AustraliaOriental);
@@ -637,7 +669,7 @@
             this.Controls.Add(this.Btn_Alberta);
             this.Controls.Add(this.Btn_Groenlandia);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "g";
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -688,10 +720,13 @@
         private System.Windows.Forms.Button Btn_AustraliaOriental;
         private System.Windows.Forms.Button Btn_Indonecia;
         private System.Windows.Forms.Button Btn_NuevaGuinea;
-        private System.Windows.Forms.ListBox LstBox_Paises;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox Btn_Empezar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox CB_jugador;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox CB_IA;
     }
 }
 
