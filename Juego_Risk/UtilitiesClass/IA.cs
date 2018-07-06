@@ -36,12 +36,18 @@ namespace Juego_Risk.UtilitiesClass
         private DecisionTree treeAttack;
         private DecisionTree treeReinforcement;
 
-        /* Board */
-        //Board board;
+        /* Coodebooks for Trees*/
+        private Codification codebookAssignment;
+        private Codification codebookAttack;
+        private Codification codebookReinforcement;
+
+        /*Singleton of Map*/
+        // Map world;
 
         /* Builder */
         public IA()
         {
+            /* teachers training*/
             this.teacherAssignment = new C45Learning();
             this.teacherAttack = new C45Learning();
             this.teacherReinforcement = new C45Learning();
@@ -51,14 +57,18 @@ namespace Juego_Risk.UtilitiesClass
             TrainingTreeAttack();
             TrainingTreeReinforcement();
             
-            //this.board = Singleton.Instance.board;
+            //paths of files data
             this.path_file_data_assignment = "training-data-assignment.csv";
             this.path_file_data_attack = "training-data-attack.csv";
             this.path_file_data_reinforcement = "training-data-reinforcement.csv";
+           
             /* Init variables*/
             this.newDataAssignment = string.Empty;
             this.newDataAttack = string.Empty;
             this.newDataReinforcement = string.Empty;
+
+            /* Instance Singleton*/
+            //this.world = Singleton.Instance.map;
         }
 
         /* Private Classes*/
@@ -85,9 +95,9 @@ namespace Juego_Risk.UtilitiesClass
             //Y_TRAIN
             string[] labels = data_training.GetColumn(8);
 
-            var codebook = new Codification("Output", labels);
+            this.codebookAssignment = new Codification("Output", labels);
             // With the codebook, we can convert the labels:
-            int[] Y_train = codebook.Translate("Output", labels);
+            int[] Y_train = this.codebookAssignment.Translate("Output", labels);
 
             /* Learn a decision tree for the XOR problem */
             this.treeAssignment = this.teacherAssignment.Learn(X_train, Y_train);
@@ -116,9 +126,9 @@ namespace Juego_Risk.UtilitiesClass
             //Y_TRAIN
             string[] labels = data_training.GetColumn(8);
 
-            var codebook = new Codification("Output", labels);
+            this.codebookAttack = new Codification("Output", labels);
             // With the codebook, we can convert the labels:
-            int[] Y_train = codebook.Translate("Output", labels);
+            int[] Y_train = this.codebookAttack.Translate("Output", labels);
 
             /* Learn a decision tree for the XOR problem */
             this.treeAttack = this.teacherAttack.Learn(X_train, Y_train);
@@ -147,12 +157,73 @@ namespace Juego_Risk.UtilitiesClass
             //Y_TRAIN
             string[] labels = data_training.GetColumn(8);
 
-            var codebook = new Codification("Output", labels);
+            this.codebookReinforcement = new Codification("Output", labels);
             // With the codebook, we can convert the labels:
-            int[] Y_train = codebook.Translate("Output", labels);
+            int[] Y_train = this.codebookReinforcement.Translate("Output", labels);
 
             /* Learn a decision tree for the XOR problem */
             this.treeReinforcement = this.teacherReinforcement.Learn(X_train, Y_train);
+        }
+
+
+        /* Prediction Functions, only one Country o Territory  */
+        private string PredictAssignmentCountry(string data)
+        {
+            /* Example variable data: "13;2;0;1;3;8;6;0.5" */
+            var aux = data.Split(';');
+            double[] query = new double[aux.Length];
+
+            for(int i = 0; i < query.Length; i++){
+                query[i] = double.Parse(aux[i]);
+            }
+
+            int predicted = this.treeAssignment.Decide(query);
+            string answer = this.codebookAssignment.Revert("Output", predicted);
+
+            /* Save data if IA win the game */
+            this.newDataAssignment += data + ";" + answer + "\n";
+
+            return answer;
+        }
+
+        private string PredictAttackCountry(string data)
+        {
+            /* Example variable data: "13;2;0;1;3;8" */
+            var aux = data.Split(';');
+            double[] query = new double[aux.Length];
+
+            for (int i = 0; i < query.Length; i++)
+            {
+                query[i] = double.Parse(aux[i]);
+            }
+
+            int predicted = this.treeAttack.Decide(query);
+            string answer = this.codebookAttack.Revert("Output", predicted);
+
+            /* Save data if IA win the game */
+            this.newDataAttack += data + ";" + answer + "\n";
+
+            return answer;
+        }
+
+        private string PredictReinforcementCountry(string data)
+        {
+            /* Example variable data: "13;2;0;1;3;8;0.6" */
+            var aux = data.Split(';');
+            double[] query = new double[aux.Length];
+
+            for (int i = 0; i < query.Length; i++)
+            {
+                query[i] = double.Parse(aux[i]);
+            }
+
+            int predicted = this.treeReinforcement.Decide(query);
+            string answer = this.codebookReinforcement.Revert("Output", predicted);
+
+            /* Save data if IA win the game */
+            this.newDataAttack += data + ";" + answer + "\n";
+
+            return answer;
         }
 
         /* Public Classes */
@@ -163,28 +234,60 @@ namespace Juego_Risk.UtilitiesClass
                 //Add new  data for phase of assignment
                 using (StreamWriter sw = File.AppendText(path_file_data_assignment))
                 {
-                    sw.WriteLine(newDataAssignment);
+                    sw.Write(newDataAssignment);
                     sw.Close();
                 }
 
                 //Add new data for phase of attack
                 using (StreamWriter sw = File.AppendText(path_file_data_attack))
                 {
-                    sw.WriteLine(newDataAttack);
+                    sw.Write(newDataAttack);
                     sw.Close();
                 }
 
                 //Add new data for phase of reinforcement
                 using (StreamWriter sw = File.AppendText(path_file_data_reinforcement))
                 {
-                    sw.WriteLine(newDataReinforcement);
+                    sw.Write(newDataReinforcement);
                     sw.Close();
                 }
 
             }
         }
 
-       
+        /* Prediction Functions, All Countries o Territories*/
+        public void PredictAllAssignment(int[] territoriesAlly)
+        {
 
+        }
+
+        public void PredictAllAttacks(int[] territoriesEnemy)
+        {
+
+        }
+
+        public void PredictAllReinforcement(int[] territoriesAlly)
+        {
+
+        }
+
+
+        /* Actions of IA*/
+
+        public void Assignment()
+        {
+
+        }
+
+        public void Attack()
+        {
+
+        }
+
+        public void Reinforcement()
+        {
+
+        }
+        
     }
 }
