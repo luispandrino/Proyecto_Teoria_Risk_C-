@@ -19,12 +19,15 @@ namespace Juego_Risk
         bool Agregar = true;
         jugador j1 = new jugador();
         jugador j2 = new jugador();
+        int ja;
+        
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
 
         public Form1()
         {
 
             InitializeComponent();
+            
             j1.name = Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre plox:v :", "Risk", "");
             lbljugadorname.Text = j1.name;
             Listbtn.Add(1, Btn_Afganistan);
@@ -91,11 +94,13 @@ namespace Juego_Risk
                     {
                         j1.terrytorios.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
+                        Listbtn[ter].Text = "5"; 
                     }
                     else
                     {
                         j2.terrytorios.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
+                        Listbtn[ter].Text = "5";
                     }
                     i++;
                 }
@@ -106,12 +111,11 @@ namespace Juego_Risk
         }
         private void Btn_Groenlandia_Click(object sender, EventArgs e)
         {
-           
-
         }
 
         private void Btn_Empezar_Click(object sender, EventArgs e)
         {
+            /*
             Prueba.AsignarJugador();
             Prueba.AsignarIA();
             if (Agregar)
@@ -127,7 +131,7 @@ namespace Juego_Risk
                 Agregar = false;
             }
             
-            
+            */
         }
     }
 }

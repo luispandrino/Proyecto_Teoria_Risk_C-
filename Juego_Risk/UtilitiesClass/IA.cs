@@ -43,7 +43,8 @@ namespace Juego_Risk.UtilitiesClass
 
         /*Singleton of Map*/
         // Map world;
-
+        Mapa world = Singleton.Instance.map;
+        
         /* Builder */
         public IA()
         {
@@ -258,7 +259,12 @@ namespace Juego_Risk.UtilitiesClass
         /* Prediction Functions, All Countries o Territories*/
         public void PredictAllAssignment(int[] territoriesAlly)
         {
+            /*foreach(country in territoriesAlly)
+            {
 
+                world.Paises[country].probAssignment = PredictAssignmentCountry();
+            }
+            */
         }
 
         public void PredictAllAttacks(int[] territoriesEnemy)
