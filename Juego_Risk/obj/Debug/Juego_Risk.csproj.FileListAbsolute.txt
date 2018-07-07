@@ -20,3 +20,25 @@ C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\J
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb
 C:\Users\ASUS\Documents\GitKraken\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csprojResolveAssemblyReference.cache
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.exe.config
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csprojResolveAssemblyReference.cache
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form1.resources
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Properties.Resources.resources
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csproj.GenerateResource.Cache
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.dll.config
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.exe
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.pdb
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.GPL.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.Core.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Statistics.dll
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.xml
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.xml
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.GPL.xml
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.xml
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.Core.xml
+C:\Users\keviu\Documents\Interciclo 5\Teoria\C#\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Statistics.xml

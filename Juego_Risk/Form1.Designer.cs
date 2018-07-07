@@ -78,6 +78,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_IA = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbljugadorname = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -612,6 +614,28 @@
             this.CB_IA.Size = new System.Drawing.Size(121, 21);
             this.CB_IA.TabIndex = 68;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(723, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 17);
+            this.label5.TabIndex = 69;
+            this.label5.Text = "Nombre:";
+            // 
+            // lbljugadorname
+            // 
+            this.lbljugadorname.AutoSize = true;
+            this.lbljugadorname.BackColor = System.Drawing.Color.Transparent;
+            this.lbljugadorname.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbljugadorname.Location = new System.Drawing.Point(783, 9);
+            this.lbljugadorname.Name = "lbljugadorname";
+            this.lbljugadorname.Size = new System.Drawing.Size(219, 17);
+            this.lbljugadorname.TabIndex = 70;
+            this.lbljugadorname.Text = "Iniciar Juego / Terminar Fase";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,6 +644,8 @@
             this.BackgroundImage = global::Juego_Risk.Properties.Resources.Mapa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1202, 552);
+            this.Controls.Add(this.lbljugadorname);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.CB_IA);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -727,6 +753,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CB_IA;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbljugadorname;
     }
 }
 

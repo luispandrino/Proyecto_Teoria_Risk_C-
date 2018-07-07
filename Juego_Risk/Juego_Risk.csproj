@@ -59,6 +59,7 @@
       <HintPath>packages\Accord.Statistics.3.8.0\lib\net45\Accord.Statistics.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +87,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UtilitiesClass\IA.cs" />
+    <Compile Include="UtilitiesClass\jugador.cs" />
     <Compile Include="UtilitiesClass\Mapa.cs" />
     <Compile Include="UtilitiesClass\Pais.cs" />
     <Compile Include="UtilitiesClass\Singleton.cs" />
