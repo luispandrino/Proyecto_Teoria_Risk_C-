@@ -336,31 +336,38 @@ namespace Juego_Risk.UtilitiesClass
             return string.Empty;
         }
 
-        public void Reinforcement()
+        public string Reinforcement()
         {
-            int cont = 0, aux = 0;
+            int cont = 0, aux = 0, IDBrinda = 0, IDRecibe = 0 ;
             foreach (var item in world.Lista_Paises)
             {
-                if (world.Lista_Paises[cont].Id_Pais == world.IA[cont])
+                for (int i = 0; i < world.IA.Count; i++)
                 {
-                    if (world.Lista_Paises[cont].P_Fort >= 0.8)
+                    if (world.Lista_Paises[cont].Id_Pais == world.IA[i])
                     {
-                        if (world.Lista_Paises[cont].Tropas > 3 && world.Lista_Paises[cont].Imp != 3)
+                        if (world.Lista_Paises[cont].P_Fort >= 0.8)
                         {
-                            aux = world.Lista_Paises[cont].Tropas - 3;
-                            world.Lista_Paises[cont].Tropas = 3;
+                            if (world.Lista_Paises[cont].Tropas > 3 && world.Lista_Paises[cont].Imp != 3)
+                            {
+                                IDBrinda = world.Lista_Paises[cont].Id_Pais;
+                                aux = world.Lista_Paises[cont].Tropas - 3;
+                                world.Lista_Paises[cont].Tropas = 3;
+                            }
                         }
-                    }
-                    else if (world.Lista_Paises[cont].P_Fort <= 0.2)
-                    {
-                        world.Lista_Paises[cont].Tropas += aux;
+                        else if (world.Lista_Paises[cont].P_Fort <= 0.2)
+                        {
+                            IDRecibe = world.Lista_Paises[cont].Id_Pais;
+                            world.Lista_Paises[cont].Tropas += aux;
+                        }
+
                     }
 
                 }
-               
+            }
+
                 cont++;
 
-            }
+            return IDBrinda + ";" + IDRecibe;
 
         }
 
