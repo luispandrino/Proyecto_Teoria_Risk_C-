@@ -8,6 +8,7 @@ namespace Juego_Risk.UtilitiesClass
 {
     public class Pais
     {
+        // atributos de cada pais
         public string Nombre { get; set; }
         public int Tropas { get; set; }
         public int Pertenencia { get; set; }
@@ -19,7 +20,18 @@ namespace Juego_Risk.UtilitiesClass
         public bool Orilla { get; set; }
         public List<int> pais_vecinos { get; set; }
 
-
+        /// <summary>
+        /// Metodo que guarda la informacion recibida para cada pais
+        /// </summary>
+        /// <param name="Nombre_Pais"></param>
+        /// <param name="Tropas"></param>
+        /// <param name="Pertenece_a"></param>
+        /// <param name="Importancia"></param>
+        /// <param name="Prioridad_Asig"></param>
+        /// <param name="Prioridad_ATK"></param>
+        /// <param name="Prioridad_Fort"></param>
+        /// <param name="Id"></param>
+        /// <param name="_pais_vecinos"></param>
         public void AgregarInfo(string Nombre_Pais, int Tropas, int Pertenece_a, int Importancia, int Prioridad_Asig, int Prioridad_ATK, int Prioridad_Fort, int Id, bool orilla, List<int> _pais_vecinos)
         {
             this.Nombre = Nombre_Pais;
@@ -34,17 +46,5 @@ namespace Juego_Risk.UtilitiesClass
             this.pais_vecinos = _pais_vecinos;
 
         }
-
-        public int AsignarNumTropas(int NumTropas)
-        {
-            Tropas = NumTropas;
-            return NumTropas;
-        }
-        public int AsignarPertenencia(int Adueño)
-        {
-            Pertenencia = Adueño;
-            return Adueño;
-        }
-
     }
 }

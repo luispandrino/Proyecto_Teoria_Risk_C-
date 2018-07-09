@@ -15,7 +15,7 @@ namespace Juego_Risk
     
     public partial class Form1 : Form
     {
-        Mapa Prueba = new Mapa();
+        Mapa Tablero = new Mapa();
         bool Agregar = true;
         jugador j1 = new jugador();
         jugador j2 = new jugador();
@@ -94,13 +94,15 @@ namespace Juego_Risk
                     {
                         j1.terrytorios.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
-                        Listbtn[ter].Text = "5"; 
+                        Listbtn[ter].Text = "5";
+                        Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
                     }
                     else
                     {
                         j2.terrytorios.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
                         Listbtn[ter].Text = "5";
+                        Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
                     }
                     i++;
                 }
