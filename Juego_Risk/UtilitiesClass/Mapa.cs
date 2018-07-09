@@ -55,6 +55,9 @@ namespace Juego_Risk.UtilitiesClass
 
         // lista que contiene cada uno de los paises y sus datos
         public List<Pais> Lista_Paises = new List<Pais>();
+        public string name;
+        public List<int> Jugador = new List<int>();
+        public List<int> IA = new List<int>();
         /// <summary>
         /// Constructor clase mapa
         /// </summary>
@@ -151,6 +154,14 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
+
+        public string Nombre_jugador(string aNombre)
+        {
+            name = aNombre;
+            return name;
+        }
+
+            
 
     }
 

@@ -17,9 +17,6 @@ namespace Juego_Risk
     {
         Mapa Tablero = new Mapa();
         bool Agregar = true;
-        jugador j1 = new jugador();
-        jugador j2 = new jugador();
-        int ja;
         
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
 
@@ -27,9 +24,9 @@ namespace Juego_Risk
         {
 
             InitializeComponent();
-            
-            j1.name = Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre plox:v :", "Risk", "");
-            lbljugadorname.Text = j1.name;
+
+            string nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre plox:v :", "Risk", ""));
+            lbljugadorname.Text = nombre;
             Listbtn.Add(1, Btn_Afganistan);
             Listbtn.Add(2, Btn_AfricaN);
             Listbtn.Add(3, Btn_AfricaOriente);
@@ -74,8 +71,6 @@ namespace Juego_Risk
             Listbtn.Add(42, Btn_Yakutks);
             initializer_terrtorios();
         }
-        //
-        //
 
         public void initializer_terrtorios()
         {
@@ -92,7 +87,7 @@ namespace Juego_Risk
 
                     if (i < 8)
                     {
-                        j1.terrytorios.Add(ter);
+                        Tablero.Jugador.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
@@ -100,7 +95,7 @@ namespace Juego_Risk
                     }
                     else
                     {
-                        j2.terrytorios.Add(ter);
+                        Tablero.IA.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
@@ -119,23 +114,7 @@ namespace Juego_Risk
 
         private void Btn_Empezar_Click(object sender, EventArgs e)
         {
-            /*
-            Prueba.AsignarJugador();
-            Prueba.AsignarIA();
-            if (Agregar)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    CB_jugador.Items.Add(Prueba.MostrarJugador());
-                }
-                for (int i = 0; i < 8; i++)
-                {
-                    CB_IA.Items.Add(Prueba.MostrarIA());
-                }
-                Agregar = false;
-            }
-            
-            */
+           
         }
     }
 }

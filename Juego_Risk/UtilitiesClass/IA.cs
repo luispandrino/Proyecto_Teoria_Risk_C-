@@ -331,17 +331,17 @@ namespace Juego_Risk.UtilitiesClass
             int cont = 0, aux = 0;
             foreach (var item in world.IA)
             {
-                if (world.IA[cont].P_Fort >= 0.8)
+                if (world.Lista_Paises[world.IA[cont]].P_Fort >= 0.8)
                 {
-                    if (world.IA[cont].Tropas > 3 && world.IA[cont].Imp != 3)
+                    if (world.Lista_Paises[world.IA[cont]].Tropas > 3 && world.IA[cont].Imp != 3)
                     {
-                        aux = world.IA[cont].Tropas - 3;
-                        world.IA[cont].Tropas = 3;
+                        aux = world.Lista_Paises[world.IA[cont]].Tropas - 3;
+                        world.Lista_Paises[world.IA[cont]].Tropas = 3;
                     }
                 }
-                else if (world.IA[cont].P_Fort <= 0.2)
+                else if (world.Lista_Paises[world.IA[cont]].P_Fort <= 0.2)
                 {
-                    world.IA[cont].Tropas += aux;
+                   world.Lista_Paises[ world.IA[cont]].Tropas += aux;
                 }
                 cont++;
 
