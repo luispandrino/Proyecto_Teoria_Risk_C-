@@ -21,16 +21,24 @@ namespace Juego_Risk
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
         int fase = 0;
         int jugador =0;
+        string nombre;
 
         public Form1()
         {
 
             InitializeComponent();
             //variable que guarda el nombre del jugador
-            string nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre plox:v :", "Risk", ""));
-            lbljugadorname.Text = nombre;
-            //Diccionario con los botones que representan a cada pais
-            Listbtn.Add(1, Btn_Afganistan);
+            // Ciclo que se encarga de verificar que ingresen un nombre
+            do
+            {
+                nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre porfavor :", "Risk", ""));
+                lbljugadorname.Text = nombre;
+            } while (nombre == "") ;
+
+
+
+                //Diccionario con los botones que representan a cada pais
+                Listbtn.Add(1, Btn_Afganistan);
             Listbtn.Add(2, Btn_AfricaN);
             Listbtn.Add(3, Btn_AfricaOriente);
             Listbtn.Add(4, Btn_Alaska);

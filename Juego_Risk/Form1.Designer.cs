@@ -82,11 +82,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblASignar = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.nUDtropas = new System.Windows.Forms.NumericUpDown();
+            this.txtPaisSeleccionado = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lblAsignamiento = new System.Windows.Forms.Label();
-            this.txtPaisSeleccionado = new System.Windows.Forms.TextBox();
-            this.nUDtropas = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).BeginInit();
@@ -672,6 +672,31 @@
             this.panel1.Size = new System.Drawing.Size(174, 209);
             this.panel1.TabIndex = 73;
             // 
+            // nUDtropas
+            // 
+            this.nUDtropas.Location = new System.Drawing.Point(19, 132);
+            this.nUDtropas.Name = "nUDtropas";
+            this.nUDtropas.Size = new System.Drawing.Size(120, 20);
+            this.nUDtropas.TabIndex = 70;
+            this.nUDtropas.ValueChanged += new System.EventHandler(this.nUDtropas_ValueChanged);
+            // 
+            // txtPaisSeleccionado
+            // 
+            this.txtPaisSeleccionado.Location = new System.Drawing.Point(16, 59);
+            this.txtPaisSeleccionado.Name = "txtPaisSeleccionado";
+            this.txtPaisSeleccionado.Size = new System.Drawing.Size(122, 20);
+            this.txtPaisSeleccionado.TabIndex = 69;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(19, 170);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 71;
+            this.button1.Text = "Accion";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -692,31 +717,6 @@
             this.lblAsignamiento.Name = "lblAsignamiento";
             this.lblAsignamiento.Size = new System.Drawing.Size(0, 17);
             this.lblAsignamiento.TabIndex = 75;
-            // 
-            // txtPaisSeleccionado
-            // 
-            this.txtPaisSeleccionado.Location = new System.Drawing.Point(16, 59);
-            this.txtPaisSeleccionado.Name = "txtPaisSeleccionado";
-            this.txtPaisSeleccionado.Size = new System.Drawing.Size(122, 20);
-            this.txtPaisSeleccionado.TabIndex = 69;
-            // 
-            // nUDtropas
-            // 
-            this.nUDtropas.Location = new System.Drawing.Point(19, 132);
-            this.nUDtropas.Name = "nUDtropas";
-            this.nUDtropas.Size = new System.Drawing.Size(120, 20);
-            this.nUDtropas.TabIndex = 70;
-            this.nUDtropas.ValueChanged += new System.EventHandler(this.nUDtropas_ValueChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(19, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 71;
-            this.button1.Text = "Accion";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -778,7 +778,7 @@
             this.Controls.Add(this.Btn_Alberta);
             this.Controls.Add(this.Btn_Groenlandia);
             this.Name = "Form1";
-            this.Text = "g";
+            this.Text = "Risk Simulator";
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
