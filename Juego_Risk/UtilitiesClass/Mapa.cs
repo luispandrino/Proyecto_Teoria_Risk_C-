@@ -55,8 +55,11 @@ namespace Juego_Risk.UtilitiesClass
 
         // lista que contiene cada uno de los paises y sus datos
         public List<Pais> Lista_Paises = new List<Pais>();
+        //variable que guarda el nombre del jugador 
         public string name;
+        //lista que guarda los ID de los territorios del jugador 
         public List<int> Jugador = new List<int>();
+        //lista que guarda los territorios de la IA
         public List<int> IA = new List<int>();
         /// <summary>
         /// Constructor clase mapa
@@ -154,7 +157,11 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-
+        /// <summary>
+        /// Metodo que almacena el nombre del jugador
+        /// </summary>
+        /// <param name="aNombre"></param>
+        /// <returns></returns>
         public string Nombre_jugador(string aNombre)
         {
             name = aNombre;

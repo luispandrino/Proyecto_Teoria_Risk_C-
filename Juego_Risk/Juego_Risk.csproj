@@ -87,7 +87,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UtilitiesClass\IA.cs" />
-    <Compile Include="UtilitiesClass\jugador.cs" />
     <Compile Include="UtilitiesClass\Mapa.cs" />
     <Compile Include="UtilitiesClass\Pais.cs" />
     <Compile Include="UtilitiesClass\Singleton.cs" />

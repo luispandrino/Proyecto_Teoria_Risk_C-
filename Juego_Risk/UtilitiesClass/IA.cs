@@ -329,20 +329,25 @@ namespace Juego_Risk.UtilitiesClass
         public void Reinforcement()
         {
             int cont = 0, aux = 0;
-            foreach (var item in world.IA)
+            foreach (var item in world.Lista_Paises)
             {
-                if (world.Lista_Paises[world.IA[cont]].P_Fort >= 0.8)
+                if (world.Lista_Paises[cont].Id_Pais == world.IA[cont])
                 {
-                    if (world.Lista_Paises[world.IA[cont]].Tropas > 3 && world.IA[cont].Imp != 3)
+                    if (world.Lista_Paises[cont].P_Fort >= 0.8)
                     {
-                        aux = world.Lista_Paises[world.IA[cont]].Tropas - 3;
-                        world.Lista_Paises[world.IA[cont]].Tropas = 3;
+                        if (world.Lista_Paises[cont].Tropas > 3 && world.Lista_Paises[cont].Imp != 3)
+                        {
+                            aux = world.Lista_Paises[cont].Tropas - 3;
+                            world.Lista_Paises[cont].Tropas = 3;
+                        }
                     }
+                    else if (world.Lista_Paises[cont].P_Fort <= 0.2)
+                    {
+                        world.Lista_Paises[cont].Tropas += aux;
+                    }
+
                 }
-                else if (world.Lista_Paises[world.IA[cont]].P_Fort <= 0.2)
-                {
-                   world.Lista_Paises[ world.IA[cont]].Tropas += aux;
-                }
+               
                 cont++;
 
             }
@@ -352,52 +357,65 @@ namespace Juego_Risk.UtilitiesClass
         public double ThreatFactor(int count)
         {
             double result = 0;
-            if (world.IA[count].Imp == 1)
-                result = 0.05;
-            else if (world.IA[count].Imp == 2)
-                result = 0.10;
-            else
-                result = 0.15;
-            if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < -5)
-                result += 0.05;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < -2 && (world.Jugador[count].Tropas - world.IA[count].Tropas) > -5)
-                result += 0.10;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < 0 && (world.Jugador[count].Tropas - world.IA[count].Tropas) > 2)
-                result += 0.20;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) == 0)
-                result += 0;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) <= 5 && (world.Jugador[count].Tropas - world.IA[count].Tropas) >= 1)
-                result += 0.30;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) <= 10 && (world.Jugador[count].Tropas - world.IA[count].Tropas) >= 6)
-                result += 0.40;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) >= 11)
-                result += 0.50;
-            return result;
+            for (int i = 0; i < 42; i++)
+            {
+                if (world.Lista_Paises[i].Id_Pais == world.IA[count] && world.Lista_Paises[i].Imp == 1)
+                {
+                    result = 0.05;
+                }
+                else if (world.Lista_Paises[i].Id_Pais == world.IA[count] && world.Lista_Paises[i].Imp == 2)
+                    result = 0.10;
+                else
+                    result = 0.15;
+                if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < -5))
+                    result += 0.05;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count] && (world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < -2) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count] && (world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > -5))
+                    result += 0.10;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < 0) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > 2))
+                    result += 0.20;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) == 0))
+                    result += 0;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) <= 5) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) >= 1))
+                    result += 0.30;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) <= 10) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) >= 6))
+                    result += 0.40;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > 11))
+                    result += 0.50;
+
+            }
+            return result; 
+           
         }
 
         public double BenefitFactor(int count)
         {
             double result = 0;
-            if (world.Jugador[count].Imp == 1)
-                result = 0.05;
-            else if (world.Jugador[count].Imp == 2)
-                result = 0.10;
-            else
-                result = 0.15;
-            if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < -5)
-                result += 0.05;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < -2 && (world.Jugador[count].Tropas - world.IA[count].Tropas) > -5)
-                result += 0.10;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) < 0 && (world.Jugador[count].Tropas - world.IA[count].Tropas) > 2)
-                result += 0.20;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) == 0)
-                result += 0;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) <= 5 && (world.Jugador[count].Tropas - world.IA[count].Tropas) >= 1)
-                result += 0.30;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) <= 10 && (world.Jugador[count].Tropas - world.IA[count].Tropas) >= 6)
-                result += 0.40;
-            else if ((world.Jugador[count].Tropas - world.IA[count].Tropas) >= 11)
-                result += 0.50;
+            for (int i = 0; i < 42; i++)
+            {
+                if (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Imp == 1)
+                {
+                    result = 0.05;
+                }
+                else if (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Imp == 2)
+                    result = 0.10;
+                else
+                    result = 0.15;
+                if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < -5))
+                    result += 0.05;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count] && (world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < -2) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count] && (world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > -5))
+                    result += 0.10;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) < 0) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > 2))
+                    result += 0.20;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) == 0))
+                    result += 0;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) <= 5) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) >= 1))
+                    result += 0.30;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) <= 10) && (world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) >= 6))
+                    result += 0.40;
+                else if ((world.Lista_Paises[i].Id_Pais == world.Jugador[count] && world.Lista_Paises[i].Id_Pais == world.IA[count]) && ((world.Lista_Paises[i].Tropas - world.Lista_Paises[i].Tropas) > 11))
+                    result += 0.50;
+
+            }
             return result;
         }
 

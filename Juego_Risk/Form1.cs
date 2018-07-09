@@ -15,18 +15,19 @@ namespace Juego_Risk
     
     public partial class Form1 : Form
     {
+        //Inicialización del mapa
         Mapa Tablero = new Mapa();
-        bool Agregar = true;
-        
+        //Diccionario que contiene los botones que representan a cada pais
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
 
         public Form1()
         {
 
             InitializeComponent();
-
+            //variable que guarda el nombre del jugador
             string nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre plox:v :", "Risk", ""));
             lbljugadorname.Text = nombre;
+            //Diccionario con los botones que representan a cada pais
             Listbtn.Add(1, Btn_Afganistan);
             Listbtn.Add(2, Btn_AfricaN);
             Listbtn.Add(3, Btn_AfricaOriente);
@@ -71,7 +72,9 @@ namespace Juego_Risk
             Listbtn.Add(42, Btn_Yakutks);
             initializer_terrtorios();
         }
-
+        /// <summary>
+        /// Metodo que reparte los territorios iniciales a cada jugador
+        /// </summary>
         public void initializer_terrtorios()
         {
             Random rnd = new Random();
