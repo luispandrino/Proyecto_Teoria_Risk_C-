@@ -17,6 +17,7 @@ namespace Juego_Risk
     {
         //Inicialización del mapa
         Mapa Tablero = Singleton.Instance.map;
+        IA playerIA = new IA();
         //Diccionario que contiene los botones que representan a cada pais
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
         int fase = 0;
@@ -35,10 +36,8 @@ namespace Juego_Risk
                 lbljugadorname.Text = nombre;
             } while (nombre == "") ;
 
-
-
-                //Diccionario con los botones que representan a cada pais
-                Listbtn.Add(1, Btn_Afganistan);
+            //Diccionario con los botones que representan a cada pais
+            Listbtn.Add(1, Btn_Afganistan);
             Listbtn.Add(2, Btn_AfricaN);
             Listbtn.Add(3, Btn_AfricaOriente);
             Listbtn.Add(4, Btn_Alaska);
@@ -83,6 +82,9 @@ namespace Juego_Risk
             initializer_terrtorios();
             Eventos_botones();
             lblASignar.Text ="10";
+
+            panel1.Enabled = false;
+            lblAsignamiento.Text = "Asignación";
         }
         /// <summary>
         /// Metodo que reparte los territorios iniciales a cada jugador
@@ -186,6 +188,7 @@ namespace Juego_Risk
             }
             
         }
+
         private void Btn_Groenlandia_Click(object sender, EventArgs e)
         {
         }
@@ -196,20 +199,56 @@ namespace Juego_Risk
             if (fase==0)
             {
                 fase = 1;
+                panel1.Enabled = true;
                 lblAsignamiento.Text = "Ataque";
             }
             else if (fase == 1)
             {
-                fase = 2;
+                fase = 3;
                 panel1.Enabled = true;
-                lblAsignamiento.Text = "Reforsamiento";
+                lblAsignamiento.Text = "Reforzamiento";
             }
-            else
+            else if(fase == 2)
             {
                 fase = 0;
                 panel1.Enabled = false;
-                lblAsignamiento.Text = "Asignamiento";
+                lblAsignamiento.Text = "Asignación";
             }
+            else
+            {
+                //Turno de la IA
+                Btn_Empezar.Enabled = false;  
+                panel1.Enabled = false;
+                lblAsignamiento.Text = "Ataque";
+                //Ejecuta las acciones de la Inteligencia Artificial
+                lbljugadorname.Text = "IA";
+
+                /*
+
+                //Acción del boton que debe presionar al finalizar el turno
+                fase = 2;
+                lbljugadorname.Text = Tablero.name;
+                lblAsignamiento.Text = "Asignación";
+                Btn_Empezar.Enabled = true;
+                */
+            }
+        }
+
+        private void IA_Assignment()
+        {
+            lblAsignamiento.Text = "Asignación";
+
+        }
+
+        private void IA_Attack()
+        {
+            lblAsignamiento.Text = "Ataque";
+            playerIA.Attack();
+        }
+
+        private void IA_Reinforcement()
+        {
+            lblAsignamiento.Text = "Reforzamiento";
         }
 
         private void nUDtropas_ValueChanged(object sender, EventArgs e)
@@ -222,6 +261,11 @@ namespace Juego_Risk
            
         }
 
+        /// <summary>
+        /// Boton que corresponde a la acción de ataque
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             //FAlta Ataque 
@@ -244,7 +288,8 @@ namespace Juego_Risk
                 id_seleccionado = Convert.ToInt32(aux1[0]);
                 id_opcion = Convert.ToInt32(aux1[0]);
 
-                if (Tablero.Lista_Paises[id_opcion-1].Pertenencia==2)
+                //Pertenencia 1 = Jugador
+                if (Tablero.Lista_Paises[id_opcion-1].Pertenencia==1)
                 {
                     Tablero.Lista_Paises[id_opcion - 1].Tropas = Tablero.Lista_Paises[id_opcion - 1].Tropas - Tablero.Lista_Paises[id_seleccionado - 1].Tropas;
                 }

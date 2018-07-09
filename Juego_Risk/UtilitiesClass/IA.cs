@@ -55,16 +55,18 @@ namespace Juego_Risk.UtilitiesClass
             this.teacherAssignment = new C45Learning();
             this.teacherAttack = new C45Learning();
             this.teacherReinforcement = new C45Learning();
-
-            /* Training decision trees*/
-            TrainingTreeAssignment();
-            TrainingTreeAttack();
-            TrainingTreeReinforcement();
-
+            
             //paths of files data
             this.path_file_data_assignment = "training-data-assignment.csv";
             this.path_file_data_attack = "training-data-attack.csv";
             this.path_file_data_reinforcement = "training-data-reinforcement.csv";
+
+            /* Training decision trees*/
+            //TrainingTreeAssignment();
+            //TrainingTreeAttack();
+            //TrainingTreeReinforcement();
+
+
 
             /* Init variables*/
             this.newDataAssignment = string.Empty;

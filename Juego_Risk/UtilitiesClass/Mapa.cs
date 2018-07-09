@@ -52,6 +52,7 @@ namespace Juego_Risk.UtilitiesClass
         Pais Ural = new Pais();
         Pais Venezuela = new Pais();
         Pais Yakutsk = new Pais();
+
         public int tropaAsigamiento;
         // lista que contiene cada uno de los paises y sus datos
         public List<Pais> Lista_Paises = new List<Pais>();
@@ -61,6 +62,7 @@ namespace Juego_Risk.UtilitiesClass
         public List<int> Jugador = new List<int>();
         //lista que guarda los territorios de la IA
         public List<int> IA = new List<int>();
+        
         /// <summary>
         /// Constructor clase mapa
         /// </summary>

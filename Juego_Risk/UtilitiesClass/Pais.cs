@@ -45,7 +45,6 @@ namespace Juego_Risk.UtilitiesClass
             this.Id_Pais = Id;
             this.Orilla = orilla;
             this.pais_vecinos = _pais_vecinos;
-
         }
     }
 }
