@@ -52,7 +52,7 @@ namespace Juego_Risk.UtilitiesClass
         Pais Ural = new Pais();
         Pais Venezuela = new Pais();
         Pais Yakutsk = new Pais();
-
+        public int tropaAsigamiento;
         // lista que contiene cada uno de los paises y sus datos
         public List<Pais> Lista_Paises = new List<Pais>();
         //variable que guarda el nombre del jugador 
@@ -66,6 +66,7 @@ namespace Juego_Risk.UtilitiesClass
         /// </summary>
         public Mapa()
         {
+            tropaAsigamiento = 10;
             //se ingresa la informacion de cada pais
             Afganistan.AgregarInfo("Afganistan", 0, 3, 1, 0, 0, 0, 1, false, new List<int> { 32, 21, 11, 40, 39 });
             Africa_del_Norte.AgregarInfo("Africa del Norte", 0, 3, 2, 0, 0, 0, 2, false, new List<int> { 9, 12, 3, 13, 18, 17 });
@@ -110,7 +111,7 @@ namespace Juego_Risk.UtilitiesClass
             Venezuela.AgregarInfo("Venezuela", 0, 3, 1, 0, 0, 0, 41, false, new List<int> { 9, 33, 10 });
             Yakutsk.AgregarInfo("Yakutsk", 0, 3, 1, 0, 0, 0, 42, false, new List<int> { 36, 23, 26 });
             //Se agregan los paises a la lista principal 
-            Lista_Paises.Add(Afganistan);
+            
             Lista_Paises.Add(Afganistan);
             Lista_Paises.Add(Africa_del_Norte);
             Lista_Paises.Add(Africa_Oriental);

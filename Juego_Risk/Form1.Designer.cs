@@ -74,13 +74,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Btn_Empezar = new System.Windows.Forms.PictureBox();
-            this.CB_jugador = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.CB_IA = new System.Windows.Forms.ComboBox();
+            this.CB_vecinos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lbljugadorname = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblASignar = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblAsignamiento = new System.Windows.Forms.Label();
+            this.txtPaisSeleccionado = new System.Windows.Forms.TextBox();
+            this.nUDtropas = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_Ucrania
@@ -573,46 +582,39 @@
             this.Btn_Empezar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Empezar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Empezar.BackgroundImage")));
             this.Btn_Empezar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Btn_Empezar.Location = new System.Drawing.Point(45, 43);
+            this.Btn_Empezar.Location = new System.Drawing.Point(5, 70);
             this.Btn_Empezar.Name = "Btn_Empezar";
             this.Btn_Empezar.Size = new System.Drawing.Size(91, 69);
             this.Btn_Empezar.TabIndex = 63;
             this.Btn_Empezar.TabStop = false;
             this.Btn_Empezar.Click += new System.EventHandler(this.Btn_Empezar_Click);
             // 
-            // CB_jugador
-            // 
-            this.CB_jugador.FormattingEnabled = true;
-            this.CB_jugador.Location = new System.Drawing.Point(26, 168);
-            this.CB_jugador.Name = "CB_jugador";
-            this.CB_jugador.Size = new System.Drawing.Size(121, 21);
-            this.CB_jugador.TabIndex = 65;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 146);
+            this.label3.Location = new System.Drawing.Point(16, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(106, 13);
             this.label3.TabIndex = 66;
-            this.label3.Text = "Paises Jugador";
+            this.label3.Text = "Paise Seleccionados";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 209);
+            this.label4.Location = new System.Drawing.Point(16, 83);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 67;
-            this.label4.Text = "Paises IA";
+            this.label4.Text = "Opciones de Pais";
             // 
-            // CB_IA
+            // CB_vecinos
             // 
-            this.CB_IA.FormattingEnabled = true;
-            this.CB_IA.Location = new System.Drawing.Point(26, 237);
-            this.CB_IA.Name = "CB_IA";
-            this.CB_IA.Size = new System.Drawing.Size(121, 21);
-            this.CB_IA.TabIndex = 68;
+            this.CB_vecinos.FormattingEnabled = true;
+            this.CB_vecinos.Location = new System.Drawing.Point(16, 105);
+            this.CB_vecinos.Name = "CB_vecinos";
+            this.CB_vecinos.Size = new System.Drawing.Size(121, 21);
+            this.CB_vecinos.TabIndex = 68;
+            this.CB_vecinos.SelectedIndexChanged += new System.EventHandler(this.CB_vecinos_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -636,6 +638,86 @@
             this.lbljugadorname.TabIndex = 70;
             this.lbljugadorname.Text = "Iniciar Juego / Terminar Fase";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(2, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(142, 17);
+            this.label6.TabIndex = 71;
+            this.label6.Text = "Tropas disponibles:";
+            // 
+            // lblASignar
+            // 
+            this.lblASignar.AutoSize = true;
+            this.lblASignar.BackColor = System.Drawing.Color.Transparent;
+            this.lblASignar.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblASignar.Location = new System.Drawing.Point(150, 26);
+            this.lblASignar.Name = "lblASignar";
+            this.lblASignar.Size = new System.Drawing.Size(0, 17);
+            this.lblASignar.TabIndex = 72;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.nUDtropas);
+            this.panel1.Controls.Add(this.txtPaisSeleccionado);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.CB_vecinos);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Location = new System.Drawing.Point(12, 154);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(174, 209);
+            this.panel1.TabIndex = 73;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(9, 47);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 17);
+            this.label7.TabIndex = 74;
+            this.label7.Text = "Fase";
+            // 
+            // lblAsignamiento
+            // 
+            this.lblAsignamiento.AutoSize = true;
+            this.lblAsignamiento.BackColor = System.Drawing.Color.Transparent;
+            this.lblAsignamiento.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAsignamiento.Location = new System.Drawing.Point(57, 47);
+            this.lblAsignamiento.Name = "lblAsignamiento";
+            this.lblAsignamiento.Size = new System.Drawing.Size(0, 17);
+            this.lblAsignamiento.TabIndex = 75;
+            // 
+            // txtPaisSeleccionado
+            // 
+            this.txtPaisSeleccionado.Location = new System.Drawing.Point(16, 59);
+            this.txtPaisSeleccionado.Name = "txtPaisSeleccionado";
+            this.txtPaisSeleccionado.Size = new System.Drawing.Size(122, 20);
+            this.txtPaisSeleccionado.TabIndex = 69;
+            // 
+            // nUDtropas
+            // 
+            this.nUDtropas.Location = new System.Drawing.Point(19, 132);
+            this.nUDtropas.Name = "nUDtropas";
+            this.nUDtropas.Size = new System.Drawing.Size(120, 20);
+            this.nUDtropas.TabIndex = 70;
+            this.nUDtropas.ValueChanged += new System.EventHandler(this.nUDtropas_ValueChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(19, 170);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 71;
+            this.button1.Text = "Accion";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -644,12 +726,13 @@
             this.BackgroundImage = global::Juego_Risk.Properties.Resources.Mapa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1202, 552);
+            this.Controls.Add(this.lblAsignamiento);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lblASignar);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lbljugadorname);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.CB_IA);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.CB_jugador);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Btn_Empezar);
             this.Controls.Add(this.Btn_NuevaGuinea);
@@ -697,6 +780,9 @@
             this.Name = "Form1";
             this.Text = "g";
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -749,12 +835,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox Btn_Empezar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox CB_jugador;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox CB_IA;
+        private System.Windows.Forms.ComboBox CB_vecinos;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbljugadorname;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblASignar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAsignamiento;
+        private System.Windows.Forms.TextBox txtPaisSeleccionado;
+        private System.Windows.Forms.NumericUpDown nUDtropas;
+        private System.Windows.Forms.Button button1;
     }
 }
 

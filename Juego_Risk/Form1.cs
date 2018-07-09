@@ -16,9 +16,11 @@ namespace Juego_Risk
     public partial class Form1 : Form
     {
         //Inicialización del mapa
-        Mapa Tablero = new Mapa();
+        Mapa Tablero = Singleton.Instance.map;
         //Diccionario que contiene los botones que representan a cada pais
         Dictionary<int, Button> Listbtn = new Dictionary<int, Button>();
+        int fase = 0;
+        int jugador =0;
 
         public Form1()
         {
@@ -71,6 +73,8 @@ namespace Juego_Risk
             Listbtn.Add(41, Btn_Venezuela);
             Listbtn.Add(42, Btn_Yakutks);
             initializer_terrtorios();
+            Eventos_botones();
+            lblASignar.Text ="10";
         }
         /// <summary>
         /// Metodo que reparte los territorios iniciales a cada jugador
@@ -93,16 +97,18 @@ namespace Juego_Risk
                         Tablero.Jugador.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
                         Listbtn[ter].Text = "5";
-                        Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
-                        Tablero.Lista_Paises[ter].Pertenencia = 1;
+                        Tablero.Lista_Paises[ter-1].Tropas = Convert.ToInt32(Listbtn[ter].Text);
+                        Tablero.Lista_Paises[ter-1].Pertenencia = 1;
+                        
                     }
                     else
                     {
                         Tablero.IA.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
                         Listbtn[ter].Text = "5";
-                        Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
-                        Tablero.Lista_Paises[ter].Pertenencia = 2;
+                        Tablero.Lista_Paises[ter-1].Tropas = Convert.ToInt32(Listbtn[ter].Text);
+                        Tablero.Lista_Paises[ter-1].Pertenencia = 2;
+                        
                     }
                     i++;
                 }
@@ -111,13 +117,130 @@ namespace Juego_Risk
 
 
         }
+        public void Eventos_botones()
+        {
+            for (int i = 1; i < 43; i++)
+            {
+                Listbtn[i].Click += new System.EventHandler(this.Evento_Generico);
+            }
+
+        }
+
+        private void Evento_Generico(object sender, EventArgs e)
+        {
+            Button Buttonaux = (Button)sender;
+            int tropaAsignada=1;
+            int Id_encontrado=0;
+            int tropaActual;
+            for (int i = 1; i < 43; i++)
+            {
+                if (Buttonaux == Listbtn[i])
+                {
+                    Id_encontrado = i;
+
+                }
+            }
+            if (fase==0)
+            {
+                if (jugador==0)
+                {
+                    if (Tablero.tropaAsigamiento>0)
+                    {
+                        if (Tablero.Jugador.Exists(x => x == Id_encontrado))
+                        {
+                            Tablero.Lista_Paises[Id_encontrado - 1].Tropas++;
+                            Tablero.tropaAsigamiento--;
+                            Buttonaux.Text = Tablero.Lista_Paises[Id_encontrado - 1].Tropas.ToString();
+                            lblASignar.Text = Tablero.tropaAsigamiento.ToString();
+                        }
+
+                    }
+
+
+                }
+
+            }
+            else if (fase==1)
+            {
+                txtPaisSeleccionado.Text = Id_encontrado+"."+Tablero.Lista_Paises[Id_encontrado - 1].Nombre;
+                CB_vecinos.Items.Clear();
+                if (Tablero.Jugador.Exists(x => x == Id_encontrado))
+                {
+                    for (int i = 0; i < Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos.Count; i++)
+                    {
+                        CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "."+Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                    }
+                    nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
+                }
+               
+
+
+            }
+            
+        }
         private void Btn_Groenlandia_Click(object sender, EventArgs e)
         {
         }
 
         private void Btn_Empezar_Click(object sender, EventArgs e)
         {
+            
+            if (fase==0)
+            {
+                fase = 1;
+                lblAsignamiento.Text = "Ataque";
+            }
+            else if (fase == 1)
+            {
+                fase = 2;
+                panel1.Enabled = true;
+                lblAsignamiento.Text = "Reforsamiento";
+            }
+            else
+            {
+                fase = 0;
+                panel1.Enabled = false;
+                lblAsignamiento.Text = "Asignamiento";
+            }
+        }
+
+        private void nUDtropas_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CB_vecinos_SelectedIndexChanged(object sender, EventArgs e)
+        {
            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //FAlta Ataque 
+            int tropasMovida;
+            int id_seleccionado;
+            int id_opcion;
+            if (CB_vecinos.SelectedIndex == -1)
+            {
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = MessageBox.Show( "sellecione un Pais en: Opciones de Pais" , "ERROR");
+            }
+            else
+            {
+                tropasMovida = Convert.ToInt32(nUDtropas.Value);
+                string[] aux1= txtPaisSeleccionado.Text.Split('.');
+                string[] aux2 =CB_vecinos.SelectedItem.ToString().Split('.');
+                id_seleccionado = Convert.ToInt32(aux1[0]);
+                id_opcion = Convert.ToInt32(aux1[0]);
+
+                if (Tablero.Lista_Paises[id_opcion-1].Pertenencia==2)
+                {
+                    Tablero.Lista_Paises[id_opcion - 1].Tropas = Tablero.Lista_Paises[id_opcion - 1].Tropas - Tablero.Lista_Paises[id_seleccionado - 1].Tropas;
+                }
+            }
         }
     }
 }
