@@ -127,6 +127,7 @@ namespace Juego_Risk
 
 
         }
+
         public void Eventos_botones()
         {
             for (int i = 1; i < 43; i++)
@@ -216,39 +217,125 @@ namespace Juego_Risk
             }
             else
             {
-                //Turno de la IA
+                /*Turno de la IA*/
+
                 Btn_Empezar.Enabled = false;  
-                panel1.Enabled = false;
-                lblAsignamiento.Text = "Ataque";
+                panel1.Enabled = false; 
                 //Ejecuta las acciones de la Inteligencia Artificial
                 lbljugadorname.Text = "IA";
 
-                /*
+                /* Inicia jugada */
+                PlayIA();
 
                 //Acción del boton que debe presionar al finalizar el turno
                 fase = 2;
                 lbljugadorname.Text = Tablero.name;
                 lblAsignamiento.Text = "Asignación";
                 Btn_Empezar.Enabled = true;
-                */
+                
             }
+        }
+
+        private void PlayIA()
+        {
+            /* Avisar en que turno esta la IA*/
+
+            /* Asignment */
+            IA_Assignment();
+
+            /* Avisar en que turno esta la IA*/
+
+            /* Attack */
+            IA_Attack();
+
+            /* Avisar en que turno esta la IA*/
+
+            /* Reinforcement */
+            IA_Reinforcement();
+
+            /* Avisar en que la IA ha terminado su turno*/
         }
 
         private void IA_Assignment()
         {
             lblAsignamiento.Text = "Asignación";
+           
+            var aux = playerIA.Assignments.Count();
+            int country = 0;
 
+            for (int i = 0; i < aux; i++)
+            {
+                /* Debe retornar el id del pais al cual se le asigno el territorio
+                * para actualizarlo en el mapa visual, esto lo hace la cola */
+                country = playerIA.Assignments.Dequeue();
+                RefreshCountries(Tablero.Lista_Paises[country].Id_Pais, Tablero.Lista_Paises[country].Pertenencia, Tablero.Lista_Paises[country].Tropas);
+                //Si quieren.. debemos agregar un tiempo de retardo entre cambios
+            }
         }
 
         private void IA_Attack()
         {
             lblAsignamiento.Text = "Ataque";
             playerIA.Attack();
+
+            var aux = playerIA.Attacks.Count();
+
+            for(int i = 0; i<aux; i++)
+            {
+                /* Debo retornar un string de los 2 paises que se ven afectados 
+               en el ataque de la forma: [2;5] */
+                string countries = playerIA.Attacks.Dequeue();
+
+                int aux1 = int.Parse(countries.Split(';')[0]);
+                RefreshCountries(Tablero.Lista_Paises[aux1].Id_Pais, Tablero.Lista_Paises[aux1].Pertenencia, Tablero.Lista_Paises[aux1].Tropas);
+
+                //Tiempo de retardo entre cambios 
+
+                int aux2 = int.Parse(countries.Split(';')[1]);
+                RefreshCountries(Tablero.Lista_Paises[aux2].Id_Pais, Tablero.Lista_Paises[aux2].Pertenencia, Tablero.Lista_Paises[aux2].Tropas);
+
+                //Tiempo de retardo entre cambios
+            }
         }
 
         private void IA_Reinforcement()
         {
             lblAsignamiento.Text = "Reforzamiento";
+            playerIA.Reinforcement();
+            var aux = playerIA.Reinforcements.Count();
+
+            for (int i = 0; i < aux; i++)
+            {
+                /* Debo retornar un string de los 2 paises que se ven afectados 
+               en el ataque de la forma: [2;5] */
+                string countries = playerIA.Reinforcements.Dequeue();
+
+                int aux1 = int.Parse(countries.Split(';')[0]);
+                RefreshCountries(Tablero.Lista_Paises[aux1].Id_Pais, Tablero.Lista_Paises[aux1].Pertenencia, Tablero.Lista_Paises[aux1].Tropas);
+
+                //Tiempo de retardo entre cambios 
+
+                int aux2 = int.Parse(countries.Split(';')[1]);
+                RefreshCountries(Tablero.Lista_Paises[aux2].Id_Pais, Tablero.Lista_Paises[aux2].Pertenencia, Tablero.Lista_Paises[aux2].Tropas);
+
+                //Tiempo de retardo entre cambios
+            }
+        }
+
+        private void RefreshCountries(int id, int pertenencia, int tropas)
+        {
+            Listbtn[id-1].Text = tropas.ToString();
+
+            switch (pertenencia)
+            {
+                case 1: //Jugador
+                    Listbtn[id-1].BackColor = System.Drawing.Color.Green;
+                    break;
+
+                case 2: //IA
+                    Listbtn[id-1].BackColor = System.Drawing.Color.Blue;
+                    break;
+            }
         }
 
         private void nUDtropas_ValueChanged(object sender, EventArgs e)

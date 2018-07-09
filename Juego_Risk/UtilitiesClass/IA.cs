@@ -43,10 +43,15 @@ namespace Juego_Risk.UtilitiesClass
 
         /*Singleton of Map*/
         // Map world;
-        Mapa world = Singleton.Instance.map;
+        Mapa world;
 
         /* Variables */
         string data = "";
+
+        /* Colas auxiliares*/
+        public Queue<string> Attacks;
+        public Queue<int> Assignments;
+        public Queue<string> Reinforcements;
 
         /* Builder */
         public IA()
@@ -66,15 +71,18 @@ namespace Juego_Risk.UtilitiesClass
             //TrainingTreeAttack();
             //TrainingTreeReinforcement();
 
-
-
             /* Init variables*/
             this.newDataAssignment = string.Empty;
             this.newDataAttack = string.Empty;
             this.newDataReinforcement = string.Empty;
 
             /* Instance Singleton*/
-            //this.world = Singleton.Instance.map;
+            this.world = Singleton.Instance.map;
+
+            /*Init Queues*/
+            Attacks = new Queue<string>();
+            Assignments = new Queue<int>();
+            Reinforcements = new Queue<string>();
         }
 
         /* Private Classes*/
@@ -263,7 +271,7 @@ namespace Juego_Risk.UtilitiesClass
         }
 
         /* Prediction Functions, All Countries o Territories*/
-        public void PredictAllAssignment(int[] territoriesAlly)
+        private void PredictAllAssignment(int[] territoriesAlly)
         {
             foreach (var country in territoriesAlly)
             {
@@ -281,7 +289,7 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        public void PredictAllAttacks(int[] territoriesEnemy)
+        private void PredictAllAttacks(int[] territoriesEnemy)
         {
             foreach (var country in territoriesEnemy)
             {
@@ -297,7 +305,7 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        public void PredictAllReinforcement(int[] territoriesAlly)
+        private void PredictAllReinforcement(int[] territoriesAlly)
         {
             foreach (var country in territoriesAlly)
             {
@@ -323,9 +331,9 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        public void Attack()
+        public string Attack()
         {
-
+            return string.Empty;
         }
 
         public void Reinforcement()
