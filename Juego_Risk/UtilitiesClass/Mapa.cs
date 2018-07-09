@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Juego_Risk.UtilitiesClass
 {
-    public class Mapa
+     class Mapa
     {
         int i = 0;
         int x = 0;
@@ -54,25 +54,26 @@ namespace Juego_Risk.UtilitiesClass
         Pais Venezuela = new Pais();
         Pais Yakutsk = new Pais();
 
-        List<Pais> Lista_Paises = new List<Pais>();
+        public List<Pais> Lista_Paises = new List<Pais>();
         List<Pais> Jugador = new List<Pais>();
         List<Pais> IA = new List<Pais>();
         Random Num = new Random();
         public Mapa()
         {
             //se ingresa la informacion de cada pais
-            Afganistan.AgregarInfo("Afganistan", 0, 3, 1, 0, 0, 0, 1);
-            Africa_del_Norte.AgregarInfo("Africa del Norte", 0, 3, 2, 0, 0, 0, 2);
-            Africa_Oriental.AgregarInfo("Africa Oriental", 0, 3, 3, 0, 0, 0, 3);
-            Alaska.AgregarInfo("Alaska", 0, 3, 3, 0, 0, 0, 4);
-            Alberta.AgregarInfo("Alberta", 0, 3, 2, 0, 0, 0, 5);
-            Argentina.AgregarInfo("Argentina", 0, 3, 1, 0, 0, 0, 6);
-            Australia_Occidental.AgregarInfo("Australia Occidental", 0, 3, 1, 0, 0, 0, 7);
-            Australia_Oriental.AgregarInfo("Australia Oriental", 0, 3, 1, 0, 0, 0, 8);
-            Brasil.AgregarInfo("Brasil", 0, 3, 2, 0, 0, 0, 9);
-            Centro_America.AgregarInfo("Centro America", 0, 3, 1, 0, 0, 0, 10);
-            China.AgregarInfo("China", 0, 3, 1, 0, 0, 0, 11);
-            Congo.AgregarInfo("Congo", 0, 3, 1, 0, 0, 0, 12);
+            //se ingresa la informacion de cada pais
+            Afganistan.AgregarInfo("Afganistan", 0, 3, 1, 0, 0, 0, 1, new List<int> { 32, 21, 11, 40, 39 });
+            Africa_del_Norte.AgregarInfo("Africa del Norte", 0, 3, 2, 0, 0, 0, 2, new List<int> { 9, 12, 3, 13, 18, 17 });
+            Africa_Oriental.AgregarInfo("Africa Oriental", 0, 3, 3, 0, 0, 0, 3, new List<int> { 13, 2, 12, 37, 27, 32 });
+            Alaska.AgregarInfo("Alaska", 0, 3, 3, 0, 0, 0, 4, new List<int> { 38, 5, 26 });
+            Alberta.AgregarInfo("Alberta", 0, 3, 2, 0, 0, 0, 5, new List<int> { 4, 38, 37, 30 });
+            Argentina.AgregarInfo("Argentina", 0, 3, 1, 0, 0, 0, 6, new List<int> { 33, 9 });
+            Australia_Occidental.AgregarInfo("Australia Occidental", 0, 3, 1, 0, 0, 0, 7, new List<int> { 22, 8, 29 });
+            Australia_Oriental.AgregarInfo("Australia Oriental", 0, 3, 1, 0, 0, 0, 8, new List<int> { 7, 29 });
+            Brasil.AgregarInfo("Brasil", 0, 3, 2, 0, 0, 0, 9, new List<int> { 2, 41, 33, 6 });
+            Centro_America.AgregarInfo("Centro America", 0, 3, 1, 0, 0, 0, 10, new List<int> { 41, 30, 15 });
+            China.AgregarInfo("China", 0, 3, 1, 0, 0, 0, 11, new List<int> { 35, 21, 28, 36, 40, 1 });
+            Congo.AgregarInfo("Congo", 0, 3, 1, 0, 0, 0, 12, new List<int> { 2, 3, 37 });
             Egipto.AgregarInfo("Egipto", 0, 3, 2, 0, 0, 0, 13);
             Escandinavia.AgregarInfo("Escandinavia", 0, 3, 2, 0, 0, 0, 14);
             Este_USA.AgregarInfo("Este USA", 0, 3, 1, 0, 0, 0, 15);

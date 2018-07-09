@@ -16,9 +16,10 @@ namespace Juego_Risk.UtilitiesClass
         public int P_ATK { get; set; }
         public int P_Fort { get; set; }
         public int Id_Pais { get; set; }
+        public List<int> pais_vecinos { get; set; }
 
 
-        public void AgregarInfo(string Nombre_Pais, int Tropas, int Pertenece_a, int Importancia, int Prioridad_Asig, int Prioridad_ATK, int Prioridad_Fort , int Id)
+        public void AgregarInfo(string Nombre_Pais, int Tropas, int Pertenece_a, int Importancia, int Prioridad_Asig, int Prioridad_ATK, int Prioridad_Fort, int Id, List<int> _pais_vecinos)
         {
             this.Nombre = Nombre_Pais;
             this.Tropas = Tropas;
@@ -28,7 +29,10 @@ namespace Juego_Risk.UtilitiesClass
             this.P_ATK = Prioridad_ATK;
             this.P_Fort = Prioridad_Fort;
             this.Id_Pais = Id;
+            this.pais_vecinos = _pais_vecinos;
+
         }
+
         public int AsignarNumTropas(int NumTropas)
         {
             Tropas = NumTropas;
