@@ -172,16 +172,30 @@ namespace Juego_Risk
             }
             else if (fase==1)
             {
-                txtPaisSeleccionado.Text = Id_encontrado+"."+Tablero.Lista_Paises[Id_encontrado - 1].Nombre;
-                CB_vecinos.Items.Clear();
-                if (Tablero.Jugador.Exists(x => x == Id_encontrado))
+                txtPaisSeleccionado.Text = Id_encontrado + "." + Tablero.Lista_Paises[Id_encontrado - 1].Nombre;
+                if (Tablero.Lista_Paises[Id_encontrado - 1].Pertenencia==1)
                 {
-                    for (int i = 0; i < Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos.Count; i++)
+                    CB_vecinos.Items.Clear();
+                    if (Tablero.Jugador.Exists(x => x == Id_encontrado))
                     {
-                        CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "."+Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                        for (int i = 0; i < Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos.Count; i++)
+                        {
+                            if (Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Pertenencia != 1)
+                            {
+                                CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "." + Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                            }
+
+                        }
+                        nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
                     }
-                    nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
+                    button1.Enabled = true;
                 }
+                else
+                {
+                    button1.Enabled = false;
+                }
+                
+                
                
 
 
@@ -201,18 +215,33 @@ namespace Juego_Risk
                 fase = 1;
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Ataque";
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = MessageBox.Show("Cambio A fase de Ataque", "Mensaje");
             }
             else if (fase == 1)
             {
                 fase = 3;
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Reforzamiento";
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = MessageBox.Show("Cambio A fase de Reforzamiento", "Mensaje");
             }
             else if(fase == 2)
             {
                 fase = 0;
                 panel1.Enabled = false;
                 lblAsignamiento.Text = "Asignación";
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = MessageBox.Show("Cambio A fase de Asignación", "Mensaje");
             }
             else
             {
@@ -282,16 +311,49 @@ namespace Juego_Risk
             }
             else
             {
+                
                 tropasMovida = Convert.ToInt32(nUDtropas.Value);
                 string[] aux1= txtPaisSeleccionado.Text.Split('.');
                 string[] aux2 =CB_vecinos.SelectedItem.ToString().Split('.');
                 id_seleccionado = Convert.ToInt32(aux1[0]);
-                id_opcion = Convert.ToInt32(aux1[0]);
+                id_opcion = Convert.ToInt32(aux2[0]);
+                int diferencia;
 
+                if (fase==1)
+                {
+                    diferencia = tropasMovida - Tablero.Lista_Paises[id_opcion-1 ].Tropas;
+                    if (diferencia >= 2)
+                    {
+                        Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
+                        
+                        
+                        Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                        Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
+                        Tablero.Lista_Paises[id_opcion-1].Tropas += diferencia - 1;
+                        Listbtn[id_opcion].Text = Tablero.Lista_Paises[id_opcion - 1].Tropas.ToString();
+                        Tablero.Lista_Paises[id_opcion-1].Pertenencia = 2;
+
+                    }
+                    else
+                    {
+                        //Listbtn[id_opcion].BackColor = System.Drawing.Color;
+                        
+
+                        Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                        Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
+                        Tablero.Lista_Paises[id_opcion - 1].Tropas -= tropasMovida;
+                        Listbtn[id_opcion].Text = (Tablero.Lista_Paises[id_opcion - 1].Tropas).ToString();
+                        
+
+                    }
+
+                }
                 //Pertenencia 1 = Jugador
                 if (Tablero.Lista_Paises[id_opcion-1].Pertenencia==1)
                 {
-                    Tablero.Lista_Paises[id_opcion - 1].Tropas = Tablero.Lista_Paises[id_opcion - 1].Tropas - Tablero.Lista_Paises[id_seleccionado - 1].Tropas;
+                   
+                    //Tablero.Lista_Paises[id_opcion - 1].Tropas = Tablero.Lista_Paises[id_opcion - 1].Tropas - Tablero.Lista_Paises[id_seleccionado - 1].Tropas;
+
                 }
             }
         }
