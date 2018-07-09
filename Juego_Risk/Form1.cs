@@ -131,11 +131,7 @@ namespace Juego_Risk
 
 
         }
-<<<<<<< HEAD
-
-=======
         //manejador del Evento generico para los 42 botones
->>>>>>> 3708d5cde3aebe751c7a8a14cf6a275ad8f2836d
         public void Eventos_botones()
         {
             for (int i = 1; i < 43; i++)
