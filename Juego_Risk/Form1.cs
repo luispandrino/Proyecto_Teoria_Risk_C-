@@ -92,6 +92,7 @@ namespace Juego_Risk
         public void initializer_terrtorios()
         {
             Random rnd = new Random();
+            //lista de almacenamiento de los paises al azar 
             List<int> twoplayers = new List<int>();
             int i = 0;
             while (i < 16)
@@ -101,10 +102,11 @@ namespace Juego_Risk
                 if (!twoplayers.Exists(t => t == ter))
                 {
                     twoplayers.Add(ter);
-
+                    //Asigna los 8 territorios aleatoreos del jugador
                     if (i < 8)
                     {
                         Tablero.Jugador.Add(ter);
+                        //color verde es jugador 1
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter-1].Tropas = Convert.ToInt32(Listbtn[ter].Text);
@@ -113,8 +115,10 @@ namespace Juego_Risk
                     }
                     else
                     {
+                        //asigna los 8 territorios al azar de la IA
                         Tablero.IA.Add(ter);
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
+                        //color azul es IA
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter-1].Tropas = Convert.ToInt32(Listbtn[ter].Text);
                         Tablero.Lista_Paises[ter-1].Pertenencia = 2;
@@ -127,7 +131,11 @@ namespace Juego_Risk
 
 
         }
+<<<<<<< HEAD
 
+=======
+        //manejador del Evento generico para los 42 botones
+>>>>>>> 3708d5cde3aebe751c7a8a14cf6a275ad8f2836d
         public void Eventos_botones()
         {
             for (int i = 1; i < 43; i++)
@@ -136,7 +144,7 @@ namespace Juego_Risk
             }
 
         }
-
+        //Evento que controla los botones
         private void Evento_Generico(object sender, EventArgs e)
         {
             Button Buttonaux = (Button)sender;
