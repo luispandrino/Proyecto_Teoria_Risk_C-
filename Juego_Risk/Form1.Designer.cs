@@ -777,6 +777,7 @@
             this.Controls.Add(this.Btn_TNorte);
             this.Controls.Add(this.Btn_Alberta);
             this.Controls.Add(this.Btn_Groenlandia);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Risk Simulator";
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
