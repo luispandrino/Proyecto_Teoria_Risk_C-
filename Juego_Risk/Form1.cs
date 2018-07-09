@@ -96,6 +96,7 @@ namespace Juego_Risk
                         Listbtn[ter].BackColor = System.Drawing.Color.Green;
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
+                        Tablero.Lista_Paises[ter].Pertenencia = 1;
                     }
                     else
                     {
@@ -103,6 +104,7 @@ namespace Juego_Risk
                         Listbtn[ter].BackColor = System.Drawing.Color.Blue;
                         Listbtn[ter].Text = "5";
                         Tablero.Lista_Paises[ter].Tropas = Convert.ToInt32(Listbtn[ter].Text);
+                        Tablero.Lista_Paises[ter].Pertenencia = 2;
                     }
                     i++;
                 }

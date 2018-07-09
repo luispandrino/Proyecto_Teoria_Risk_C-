@@ -11,6 +11,7 @@ namespace Juego_Risk.UtilitiesClass
         // atributos de cada pais
         public string Nombre { get; set; }
         public int Tropas { get; set; }
+        // 1 = Jugador; 2 = IA; 3 = neutro
         public int Pertenencia { get; set; }
         public int Imp { get; set; }
         public int P_Asig { get; set; }
