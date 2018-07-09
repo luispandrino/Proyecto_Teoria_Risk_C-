@@ -24,5 +24,6 @@ namespace Juego_Risk.UtilitiesClass
         }
 
         /* Add the class map with all countries */
+        public Mapa map = new Mapa();
     }
 }
