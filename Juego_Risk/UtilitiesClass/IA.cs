@@ -729,9 +729,8 @@ namespace Juego_Risk.UtilitiesClass
                 cont++;
 
             }
-
+            Reinforcements.Enqueue(Dona + ";" + Recibe);
             return Dona + ";" + Recibe;
-
         }
 
         public double ThreatFactor(int count)
