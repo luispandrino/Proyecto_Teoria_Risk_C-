@@ -187,11 +187,26 @@ namespace Juego_Risk
                     }
                     nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
                 }
-               
-
-
             }
-            
+            else
+            {
+                txtPaisSeleccionado.Text = Id_encontrado + "." + Tablero.Lista_Paises[Id_encontrado - 1].Nombre;
+                CB_vecinos.Items.Clear();
+                if (Tablero.Jugador.Exists(x => x == Id_encontrado))
+                {
+                    for (int i = 0; i < Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos.Count; i++)
+                    {
+                        for (int j = 0; j < Tablero.Jugador.Count; j++)
+                        {
+                            if (Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] == Tablero.Jugador[j])
+                            {
+                                CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "." + Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                            }
+                        }
+                    }
+                    nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
+                }
+            }
         }
 
         private void Btn_Groenlandia_Click(object sender, EventArgs e)
@@ -255,7 +270,7 @@ namespace Juego_Risk
             /* Avisar en que turno esta la IA*/
 
             /* Reinforcement */
-            //IA_Reinforcement();
+            IA_Reinforcement();
 
             /* Avisar en que la IA ha terminado su turno*/
         }
@@ -367,7 +382,7 @@ namespace Juego_Risk
 
                 // Displays the MessageBox.
 
-                result = MessageBox.Show("sellecione un Pais en: Opciones de Pais", "ERROR");
+                result = MessageBox.Show("Selecione un Pais en: Opciones de País", "ERROR");
             }
             else
             {
@@ -379,7 +394,7 @@ namespace Juego_Risk
                 id_opcion = Convert.ToInt32(aux2[0]);
                 int diferencia;
 
-                if (fase == 1)
+                if (fase == 1 || fase== 3)
                 {
                     diferencia = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
                     if (diferencia >= 2)
