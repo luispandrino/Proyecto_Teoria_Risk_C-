@@ -246,6 +246,7 @@ namespace Juego_Risk
                 //Ejecuta las acciones de la Inteligencia Artificial
                 lbljugadorname.Text = "IA";
                 calcular_tropas(1);
+                lblASignar.Text = Tablero.tropaAsigamiento.ToString();
                 lblAsignamiento.Text = "Asignación";
                 timer1.Enabled = true;
                 /* Inicia jugada */
