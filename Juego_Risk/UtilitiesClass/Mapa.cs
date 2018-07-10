@@ -74,7 +74,7 @@ namespace Juego_Risk.UtilitiesClass
             Africa_del_Norte.AgregarInfo("Africa del Norte", 0, 3, 2, 0, 0, 0, 2, false, new List<int> { 9, 12, 3, 13, 18, 17 });
             Africa_Oriental.AgregarInfo("Africa Oriental", 0, 3, 3, 0, 0, 0, 3, false, new List<int> { 13, 2, 12, 37, 27, 32 });
             Alaska.AgregarInfo("Alaska", 0, 3, 3, 0, 0, 0, 4, true, new List<int> { 38, 5, 26 });
-            Alberta.AgregarInfo("Alberta", 0, 3, 2, 0, 0, 0, 5, false, new List<int> { 4, 38, 37, 30 });
+            Alberta.AgregarInfo("Alberta", 0, 3, 2, 0, 0, 0, 5, false, new List<int> { 4, 38, 31, 30 });
             Argentina.AgregarInfo("Argentina", 0, 3, 1, 0, 0, 0, 6, false, new List<int> { 33, 9 });
             Australia_Occidental.AgregarInfo("Australia Occidental", 0, 3, 1, 0, 0, 0, 7, true, new List<int> { 22, 8, 29 });
             Australia_Oriental.AgregarInfo("Australia Oriental", 0, 3, 1, 0, 0, 0, 8, true, new List<int> { 7, 29 });
