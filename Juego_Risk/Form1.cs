@@ -280,7 +280,11 @@ namespace Juego_Risk
         private void IA_Attack()
         {
             lblAsignamiento.Text = "Ataque";
-            playerIA.Attack();
+            //Calculate posibilities attacks
+            playerIA.PredictAllAttacks(Tablero.IA);
+
+            //Execute the best's attacks
+            playerIA.Attack(Tablero.IA);
 
             var aux = playerIA.Attacks.Count();
 

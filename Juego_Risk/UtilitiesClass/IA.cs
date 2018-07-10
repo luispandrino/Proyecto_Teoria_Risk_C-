@@ -289,21 +289,213 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        private void PredictAllAttacks(int[] territoriesEnemy)
+        public void PredictAllAttacks(List<int> territoriesAlly)
         {
+            List<int> territoriesEnemy = new List<int>();
+
+            //Agrega paises neutros y enemigos a la lista
+            foreach (var country in world.Lista_Paises)
+            {
+                if (!territoriesAlly.Contains(country.Id_Pais))
+                {
+                    territoriesEnemy.Add(country.Id_Pais);
+                }
+            }
+
+            //Analisis para cada territorio enemigo
             foreach (var country in territoriesEnemy)
             {
-                data = world.Lista_Paises[country].Id_Pais.ToString() + ",";
-                data += world.Lista_Paises[country].Tropas.ToString() + ",";
-                data += world.Lista_Paises[country].Pertenencia.ToString() + ",";
-                data += world.Jugador.Count.ToString() + ",";
-                data += world.Lista_Paises[country].Imp.ToString() + ",";
-                data += (world.Lista_Paises.Count - world.IA.Count - world.Jugador.Count).ToString();
+                int neutros = 0;
+                int enemigos = 0;
+                foreach (var element in world.Lista_Paises[country].pais_vecinos)
+                {
+                    switch (world.Lista_Paises[element].Pertenencia)
+                    {
+                        case 1: enemigos++; break;
+                        case 3: neutros++; break;
+                    }
+                }
 
+                data = world.Lista_Paises[country - 1].Id_Pais.ToString() + ";";
+                data += world.Lista_Paises[country - 1].Tropas.ToString() + ";";
+                data += (world.Lista_Paises[country - 1].Pertenencia == 3) ? "0.5;" : "1;";
+                data += enemigos.ToString() + ";";
+                data += world.Lista_Paises[country].Imp.ToString() + ";";
+                data += neutros.ToString();
+
+                //Prediction
                 PredictAttackCountry(data);
             }
 
         }
+
+        public void Attack(List<int> Allies)
+        {
+            var temp1 = PossiblesAttacks(Allies);
+            var bestAttacks = FilterAttacks(temp1);
+
+            //Execute attacks
+
+            foreach (var attack in bestAttacks)
+            {
+                ExecuteAttack(attack);
+            }
+
+        }
+
+        private void ExecuteAttack(int[] attack)
+        {
+            int rest = attack[0] - attack[1];
+            Attacks.Enqueue(attack[0].ToString() + ";" + attack[1].ToString());
+
+            switch (rest)
+            {
+                case 2:
+                    world.Lista_Paises[attack[0]].Tropas = 1;
+                    world.Lista_Paises[attack[1]].Tropas = 1;
+                    break;
+                case 3:
+                    world.Lista_Paises[attack[0]].Tropas = 1;
+                    world.Lista_Paises[attack[1]].Tropas = 1;
+                    break;
+                case 4:
+                    world.Lista_Paises[attack[0]].Tropas = 2;
+                    world.Lista_Paises[attack[1]].Tropas = 2;
+                    break;
+                case 5:
+                    world.Lista_Paises[attack[0]].Tropas = 2;
+                    world.Lista_Paises[attack[1]].Tropas = 3;
+                    break;
+                case 6:
+                    world.Lista_Paises[attack[0]].Tropas = 2;
+                    world.Lista_Paises[attack[1]].Tropas = 4;
+                    break;
+                case 7:
+                    world.Lista_Paises[attack[0]].Tropas = 3;
+                    world.Lista_Paises[attack[1]].Tropas = 4;
+                    break;
+                case 8:
+                    world.Lista_Paises[attack[0]].Tropas = 3;
+                    world.Lista_Paises[attack[1]].Tropas = 5;
+                    break;
+                case 9:
+                    world.Lista_Paises[attack[0]].Tropas = 3;
+                    world.Lista_Paises[attack[1]].Tropas = 6;
+                    break;
+                case 10:
+                    world.Lista_Paises[attack[0]].Tropas = 4;
+                    world.Lista_Paises[attack[1]].Tropas = 6;
+                    break;
+                default:
+
+                    if (rest % 2 == 0)
+                    {
+                        world.Lista_Paises[attack[0]].Tropas = rest / 2;
+                        world.Lista_Paises[attack[1]].Tropas = rest / 2;
+                    }
+                    else
+                    {
+                        world.Lista_Paises[attack[0]].Tropas = rest / 2;
+                        world.Lista_Paises[attack[1]].Tropas = (rest / 2) + 1;
+                    }
+                    break;
+            }
+
+        }
+
+        private List<int[]> PossiblesAttacks(List<int> countries)
+        {
+            List<int[]> possibles = new List<int[]>();
+
+            foreach (var element in countries)
+            {
+                Pais country = world.Lista_Paises[element];
+
+                foreach (var neighbour in country.pais_vecinos)
+                {
+                    Pais countryNeighbour = world.Lista_Paises[neighbour];
+                    int diferenciaTropas = 0;
+
+                    switch (countryNeighbour.Pertenencia)
+                    {
+                        case 1:
+
+                            if (countryNeighbour.P_ATK >= 0.75)
+                            {
+                                diferenciaTropas = country.Tropas - countryNeighbour.Tropas;
+
+                                if (diferenciaTropas >= 2)
+                                {
+                                    possibles.Add(new int[] { country.Id_Pais, countryNeighbour.Id_Pais });
+                                }
+                            }
+                            break;
+
+                        case 3:
+                            if (countryNeighbour.P_ATK >= 0.75)
+                            {
+                                possibles.Add(new int[] { country.Id_Pais, countryNeighbour.Id_Pais });
+                            }
+                            break;
+                    }
+                }
+            }
+
+            return possibles;
+        }
+
+        private List<int[]> FilterAttacks(List<int[]> options)
+        {
+            List<int[]> newBestsAttacks = new List<int[]>();
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                var element = options[i];
+                bool add = true;
+
+                for (int j = 0; j < options.Count; j++)
+                {
+                    if (!(j == i))
+                    {
+                        var element2 = options[j];
+
+                        if (element[1] == element2[1])
+                        {
+                            add = false;
+                            var enemy1 = world.Lista_Paises[element[0]];
+                            var enemy2 = world.Lista_Paises[element2[0]];
+
+                            if (enemy1.P_Asig > enemy2.P_Asig)
+                            {
+                                newBestsAttacks.Add(element);
+                            }
+                            else if (enemy1.P_Asig == enemy2.P_Asig)
+                            {
+                                Random r = new Random();
+                                var result = r.Next(0, 3);
+
+                                switch (result)
+                                {
+                                    case 0: newBestsAttacks.Add(element); break;
+                                    case 1: newBestsAttacks.Add(element); break;
+                                    case 2: newBestsAttacks.Add(element2); break; ;
+                                }
+                            }
+                            else
+                            {
+                                newBestsAttacks.Add(element2);
+                            }
+                        }
+                    }
+                }
+
+                if (add) { newBestsAttacks.Add(element); }
+            }
+
+            newBestsAttacks = newBestsAttacks.Distinct().ToList();
+            return newBestsAttacks;
+        }
+
 
         private void PredictAllReinforcement(int[] territoriesAlly)
         {
