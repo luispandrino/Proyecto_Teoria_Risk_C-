@@ -179,3 +179,6 @@ C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Jueg
 C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form1.resources
 C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Properties.Resources.resources
 C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csproj.GenerateResource.Cache
+C:\Users\keviu\Documents\Interciclo 5\Teoria\Nueva carpeta\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.exe.config
+C:\Users\keviu\Documents\Interciclo 5\Teoria\Nueva carpeta\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
+C:\Users\keviu\Documents\Interciclo 5\Teoria\Nueva carpeta\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb

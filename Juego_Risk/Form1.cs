@@ -23,6 +23,9 @@ namespace Juego_Risk
         int fase = 0;
         int jugador =0;
         string nombre;
+        int contador = 0;
+        int auxtimer = 0;
+
 
         public Form1()
         {
@@ -236,21 +239,20 @@ namespace Juego_Risk
             }
             else
             {
-                /*Turno de la IA*/
+                 /*Turno de la IA*/
 
                 Btn_Empezar.Enabled = false;
                 panel1.Enabled = false;
                 //Ejecuta las acciones de la Inteligencia Artificial
                 lbljugadorname.Text = "IA";
-
+                Tablero.tropaAsigamiento = 10;
+                lblAsignamiento.Text = "Asignación";
+                timer1.Enabled = true;
                 /* Inicia jugada */
-                PlayIA();
+                //PlayIA();
 
                 //Acción del boton que debe presionar al finalizar el turno
-                fase = 2;
-                lbljugadorname.Text = Tablero.name;
-                lblAsignamiento.Text = "Asignación";
-                Btn_Empezar.Enabled = true;
+                //
 
             }
         }
@@ -458,6 +460,109 @@ namespace Juego_Risk
                 CB_vecinos.Items.Clear();
                 nUDtropas.Value = 0;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //var aux = playerIA.Assignments.Count();
+            int country = 0;
+
+            if (lblAsignamiento.Text == "Asignación")
+            {
+                if (contador == 0)
+                {
+                    playerIA.Assignment();
+                    auxtimer = playerIA.Assignments.Count();
+
+                }
+                if (contador < auxtimer)
+                {
+                    country = playerIA.Assignments.Dequeue();
+                    RefreshCountries(Tablero.Lista_Paises[country - 1].Id_Pais, Tablero.Lista_Paises[country - 1].Pertenencia, Tablero.Lista_Paises[country - 1].Tropas);
+                    //Si quieren.. debemos agregar un tiempo de retardo entre cambios
+                    contador++;
+                }
+                else
+                {
+                    lblAsignamiento.Text = "Ataque";
+                    //Calculate posibilities attacks
+                    playerIA.PredictAllAttacks(Tablero.IA);
+
+                    //Execute the best's attacks
+                    playerIA.Attack(Tablero.IA);
+
+
+                    contador = 0;
+                    //timer1.Enabled = true;
+                    ////Execute the best's attacks
+                    //playerIA.Attack(Tablero.IA);
+
+                    auxtimer = playerIA.Attacks.Count();
+                }
+            }
+            else if (lblAsignamiento.Text == "Ataque")
+            {
+                if (contador == 0)
+                {
+
+
+                }
+                if (contador < auxtimer)
+                {
+                    string countries = playerIA.Attacks.Dequeue();
+
+                    int aux1 = int.Parse(countries.Split(';')[0]);
+                    RefreshCountries(Tablero.Lista_Paises[aux1 - 1].Id_Pais, Tablero.Lista_Paises[aux1 - 1].Pertenencia, Tablero.Lista_Paises[aux1 - 1].Tropas);
+
+                    //Tiempo de retardo entre cambios 
+
+                    int aux2 = int.Parse(countries.Split(';')[1]);
+                    RefreshCountries(Tablero.Lista_Paises[aux2 - 1].Id_Pais, Tablero.Lista_Paises[aux2 - 1].Pertenencia, Tablero.Lista_Paises[aux2 - 1].Tropas);
+
+                    //Tiempo de retardo entre cambios
+                    contador++;
+                }
+                else
+                {
+                    lblAsignamiento.Text = "Reforzamiento";
+                    playerIA.Reinforcement();
+                    contador = 0;
+
+                    auxtimer = playerIA.Reinforcements.Count();
+                }
+            }
+            else if (lblAsignamiento.Text == "Reforzamiento")
+            {
+                if (contador == 0)
+                {
+
+
+                }
+                if (contador < auxtimer)
+                {
+                    string countries = playerIA.Reinforcements.Dequeue();
+
+                    int aux1 = int.Parse(countries.Split(';')[0]);
+                    RefreshCountries(Tablero.Lista_Paises[aux1].Id_Pais, Tablero.Lista_Paises[aux1].Pertenencia, Tablero.Lista_Paises[aux1].Tropas);
+
+                    //Tiempo de retardo entre cambios 
+
+                    int aux2 = int.Parse(countries.Split(';')[1]);
+                    RefreshCountries(Tablero.Lista_Paises[aux2].Id_Pais, Tablero.Lista_Paises[aux2].Pertenencia, Tablero.Lista_Paises[aux2].Tropas);
+
+                    //Tiempo de retardo entre cambios
+                    contador++;
+                }
+                else
+                {
+                    lblAsignamiento.Text = "Asignación";
+                    fase = 0;
+                    lbljugadorname.Text = Tablero.name;
+                    Btn_Empezar.Enabled = true;
+                    timer1.Enabled = false;
+                }
+            }
+
         }
     }
 }

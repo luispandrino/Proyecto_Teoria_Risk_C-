@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Btn_Ucrania = new System.Windows.Forms.Button();
             this.Btn_Madagascar = new System.Windows.Forms.Button();
@@ -87,6 +88,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lblAsignamiento = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).BeginInit();
@@ -719,6 +721,11 @@
             this.lblAsignamiento.Size = new System.Drawing.Size(0, 17);
             this.lblAsignamiento.TabIndex = 75;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -850,6 +857,7 @@
         private System.Windows.Forms.TextBox txtPaisSeleccionado;
         private System.Windows.Forms.NumericUpDown nUDtropas;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
