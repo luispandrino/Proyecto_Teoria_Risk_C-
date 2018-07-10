@@ -295,7 +295,11 @@ namespace Juego_Risk
         private void IA_Attack()
         {
             lblAsignamiento.Text = "Ataque";
-            playerIA.Attack();
+            //Calculate posibilities attacks
+            playerIA.PredictAllAttacks(Tablero.IA);
+
+            //Execute the best's attacks
+            playerIA.Attack(Tablero.IA);
 
             var aux = playerIA.Attacks.Count();
 
@@ -418,23 +422,33 @@ namespace Juego_Risk
                     }
                     else
                     {
-                        Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
-                        Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
-                        if (diferencia == 0)
+                        if (diferencia < 0)
                         {
+                            Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                            Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
                             Tablero.Lista_Paises[id_opcion - 1].Tropas -= tropasMovida;
-                        }
-                        else if (Tablero.Lista_Paises[id_opcion - 1].Pertenencia == 2 && Tablero.Lista_Paises[id_seleccionado - 1].Tropas >= 0)
-                        {
-                            Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
-                            int aux = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
-                            Tablero.Lista_Paises[id_opcion - 1].Tropas = aux;
+                            Listbtn[id_opcion].Text = Tablero.Lista_Paises[id_opcion - 1].Tropas.ToString();
                         }
                         else
                         {
-                            Tablero.Lista_Paises[id_opcion - 1].Tropas += tropasMovida;
+                            Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                            Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
+                            if (diferencia == 0)
+                            {
+                                Tablero.Lista_Paises[id_opcion - 1].Tropas -= tropasMovida;
+                            }
+                            else if (Tablero.Lista_Paises[id_opcion - 1].Pertenencia == 2 && Tablero.Lista_Paises[id_seleccionado - 1].Tropas >= 0)
+                            {
+                                Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
+                                int aux = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
+                                Tablero.Lista_Paises[id_opcion - 1].Tropas = aux;
+                            }
+                            else
+                            {
+                                Tablero.Lista_Paises[id_opcion - 1].Tropas += tropasMovida;
+                            }
+                            Listbtn[id_opcion].Text = (Tablero.Lista_Paises[id_opcion - 1].Tropas).ToString();
                         }
-                        Listbtn[id_opcion].Text = (Tablero.Lista_Paises[id_opcion - 1].Tropas).ToString();
 
 
                     }
