@@ -68,7 +68,7 @@ namespace Juego_Risk.UtilitiesClass
 
             /* Training decision trees*/
             TrainingTreeAssignment();
-            //TrainingTreeAttack();
+            TrainingTreeAttack();
             //TrainingTreeReinforcement();
 
             /* Init variables*/
@@ -135,10 +135,10 @@ namespace Juego_Risk.UtilitiesClass
             /*Separate data and labels*/
 
             //X_TRAIN
-            double[][] X_train = data_training.GetColumns(0, 1, 2, 3, 4, 5, 6, 7).To<double[][]>();
+            double[][] X_train = data_training.GetColumns(0, 1, 2, 3, 4, 5).To<double[][]>();
 
             //Y_TRAIN
-            string[] labels = data_training.GetColumn(8);
+            string[] labels = data_training.GetColumn(6);
 
             this.codebookAttack = new Codification("Output", labels);
             // With the codebook, we can convert the labels:
@@ -307,9 +307,9 @@ namespace Juego_Risk.UtilitiesClass
             {
                 int neutros = 0;
                 int enemigos = 0;
-                foreach (var element in world.Lista_Paises[country].pais_vecinos)
+                foreach (var element in world.Lista_Paises[country - 1].pais_vecinos)
                 {
-                    switch (world.Lista_Paises[element].Pertenencia)
+                    switch (world.Lista_Paises[element - 1].Pertenencia)
                     {
                         case 1: enemigos++; break;
                         case 3: neutros++; break;
@@ -320,83 +320,106 @@ namespace Juego_Risk.UtilitiesClass
                 data += world.Lista_Paises[country - 1].Tropas.ToString() + ";";
                 data += (world.Lista_Paises[country - 1].Pertenencia == 3) ? "0.5;" : "1;";
                 data += enemigos.ToString() + ";";
-                data += world.Lista_Paises[country].Imp.ToString() + ";";
+                data += world.Lista_Paises[country - 1].Imp.ToString() + ";";
                 data += neutros.ToString();
 
                 //Prediction
-                PredictAttackCountry(data);
+                world.Lista_Paises[country - 1].P_ATK = double.Parse(PredictAttackCountry(data));
             }
 
         }
 
         public void Attack(List<int> Allies)
         {
-            var temp1 = PossiblesAttacks(Allies);
-            var bestAttacks = FilterAttacks(temp1);
+            var attacks = PossiblesAttacks(Allies);
+            //var bestAttacks = FilterAttacks(temp1);
 
             //Execute attacks
-
-            foreach (var attack in bestAttacks)
+            foreach (var attack in attacks)
             {
-                ExecuteAttack(attack);
+                if (CheckAttack(attack))
+                {
+                    ExecuteAttack(attack);
+                }
             }
 
         }
 
+        private bool CheckAttack(int[] attack)
+        {
+            var countryA = world.Lista_Paises[attack[0] - 1];
+            var countryE = world.Lista_Paises[attack[1] - 1];
+
+            if (countryE.Pertenencia == 1 || countryE.Pertenencia == 3)
+            {
+                if ((countryA.Tropas - countryE.Tropas) >= 2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void ExecuteAttack(int[] attack)
         {
-            int rest = attack[0] - attack[1];
+            int rest = world.Lista_Paises[attack[0] - 1].Tropas - world.Lista_Paises[attack[1] - 1].Tropas;
             Attacks.Enqueue(attack[0].ToString() + ";" + attack[1].ToString());
+            world.Lista_Paises[attack[1] - 1].Pertenencia = 2;
+
+            //Movimiento de territorios entre jugadores
+            world.IA.Add(attack[1]);
+            world.Jugador.Remove(attack[1]);
 
             switch (rest)
             {
                 case 2:
-                    world.Lista_Paises[attack[0]].Tropas = 1;
-                    world.Lista_Paises[attack[1]].Tropas = 1;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 1;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 1;
                     break;
                 case 3:
-                    world.Lista_Paises[attack[0]].Tropas = 1;
-                    world.Lista_Paises[attack[1]].Tropas = 1;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 1;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 1;
                     break;
                 case 4:
-                    world.Lista_Paises[attack[0]].Tropas = 2;
-                    world.Lista_Paises[attack[1]].Tropas = 2;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 2;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 2;
                     break;
                 case 5:
-                    world.Lista_Paises[attack[0]].Tropas = 2;
-                    world.Lista_Paises[attack[1]].Tropas = 3;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 2;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 3;
                     break;
                 case 6:
                     world.Lista_Paises[attack[0]].Tropas = 2;
                     world.Lista_Paises[attack[1]].Tropas = 4;
                     break;
                 case 7:
-                    world.Lista_Paises[attack[0]].Tropas = 3;
-                    world.Lista_Paises[attack[1]].Tropas = 4;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 3;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 4;
                     break;
                 case 8:
-                    world.Lista_Paises[attack[0]].Tropas = 3;
-                    world.Lista_Paises[attack[1]].Tropas = 5;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 3;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 5;
                     break;
                 case 9:
-                    world.Lista_Paises[attack[0]].Tropas = 3;
-                    world.Lista_Paises[attack[1]].Tropas = 6;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 3;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 6;
                     break;
                 case 10:
-                    world.Lista_Paises[attack[0]].Tropas = 4;
-                    world.Lista_Paises[attack[1]].Tropas = 6;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 4;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 6;
                     break;
                 default:
 
                     if (rest % 2 == 0)
                     {
-                        world.Lista_Paises[attack[0]].Tropas = rest / 2;
-                        world.Lista_Paises[attack[1]].Tropas = rest / 2;
+                        world.Lista_Paises[attack[0] - 1].Tropas = rest / 2;
+                        world.Lista_Paises[attack[1] - 1].Tropas = rest / 2;
                     }
                     else
                     {
-                        world.Lista_Paises[attack[0]].Tropas = rest / 2;
-                        world.Lista_Paises[attack[1]].Tropas = (rest / 2) + 1;
+                        world.Lista_Paises[attack[0] - 1].Tropas = rest / 2;
+                        world.Lista_Paises[attack[1] - 1].Tropas = (rest / 2) + 1;
                     }
                     break;
             }
@@ -409,11 +432,11 @@ namespace Juego_Risk.UtilitiesClass
 
             foreach (var element in countries)
             {
-                Pais country = world.Lista_Paises[element];
+                Pais country = world.Lista_Paises[element - 1];
 
                 foreach (var neighbour in country.pais_vecinos)
                 {
-                    Pais countryNeighbour = world.Lista_Paises[neighbour];
+                    Pais countryNeighbour = world.Lista_Paises[neighbour - 1];
                     int diferenciaTropas = 0;
 
                     switch (countryNeighbour.Pertenencia)
@@ -462,8 +485,8 @@ namespace Juego_Risk.UtilitiesClass
                         if (element[1] == element2[1])
                         {
                             add = false;
-                            var enemy1 = world.Lista_Paises[element[0]];
-                            var enemy2 = world.Lista_Paises[element2[0]];
+                            var enemy1 = world.Lista_Paises[element[0] - 1];
+                            var enemy2 = world.Lista_Paises[element2[0] - 1];
 
                             if (enemy1.P_Asig > enemy2.P_Asig)
                             {
@@ -486,6 +509,11 @@ namespace Juego_Risk.UtilitiesClass
                                 newBestsAttacks.Add(element2);
                             }
                         }
+
+                        if (element[0] == element2[0])
+                        {
+
+                        }
                     }
                 }
 
@@ -495,6 +523,7 @@ namespace Juego_Risk.UtilitiesClass
             newBestsAttacks = newBestsAttacks.Distinct().ToList();
             return newBestsAttacks;
         }
+
 
 
         private void PredictAllReinforcement(int[] territoriesAlly)
