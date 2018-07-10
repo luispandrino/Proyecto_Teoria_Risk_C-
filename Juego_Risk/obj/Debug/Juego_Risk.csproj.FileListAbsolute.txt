@@ -157,3 +157,25 @@ C:\Users\bryan\OneDrive\Documents\GitHub\Risk V3.0\Proyecto_Teoria_Risk_C-\Juego
 C:\Users\bryan\OneDrive\Documents\GitHub\Risk V3.0\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csproj.CoreCompileInputs.cache
 C:\Users\bryan\OneDrive\Documents\GitHub\Risk V3.0\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
 C:\Users\bryan\OneDrive\Documents\GitHub\Risk V3.0\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.exe.config
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.dll.config
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.exe
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Juego_Risk.pdb
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.GPL.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.Core.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Statistics.dll
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.MachineLearning.GPL.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Math.Core.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\bin\Debug\Accord.Statistics.xml
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csprojResolveAssemblyReference.cache
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form1.resources
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Properties.Resources.resources
+C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.csproj.GenerateResource.Cache
