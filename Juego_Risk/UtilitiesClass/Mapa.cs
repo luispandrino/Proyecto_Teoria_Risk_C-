@@ -84,7 +84,7 @@ namespace Juego_Risk.UtilitiesClass
             Congo.AgregarInfo("Congo", 0, 3, 1, 0, 0, 0, 12, false, new List<int> { 2, 3, 37 });
             Egipto.AgregarInfo("Egipto", 0, 3, 2, 0, 0, 0, 13, true, new List<int> { 32, 18, 2, 3 });
             Escandinavia.AgregarInfo("Escandinavia", 0, 3, 2, 0, 0, 0, 14, true, new List<int> { 39, 16 });
-            Este_USA.AgregarInfo("Este USA", 0, 3, 1, 0, 0, 0, 15, false, new List<int> { 15, 10, 31, 5 });
+            Este_USA.AgregarInfo("Este USA", 0, 3, 1, 0, 0, 0, 15, false, new List<int> { 10, 30, 31, 34 });
             EUA_Norte.AgregarInfo("EUA Norte", 0, 3, 2, 0, 0, 0, 16, true, new List<int> { 17, 18, 19, 39 });
             EUA_Occidental.AgregarInfo("EUA Occidental", 0, 3, 2, 0, 0, 0, 17, false, new List<int> { 18, 16, 19, 2 });
             EUA_sur.AgregarInfo("EUA sur", 0, 3, 2, 0, 0, 0, 18, false, new List<int> { 32, 13, 2, 17, 16, 39 });
@@ -99,7 +99,7 @@ namespace Juego_Risk.UtilitiesClass
             Madagascar.AgregarInfo("Madagascar", 0, 3, 3, 0, 0, 0, 27, true, new List<int> { 37, 3 });
             Mongolia.AgregarInfo("Mongolia", 0, 3, 1, 0, 0, 0, 28, false, new List<int> { 25, 26, 23, 11, 36 });
             Nueva_Guienea.AgregarInfo("Nueva Guinea", 0, 3, 2, 0, 0, 0, 29, true, new List<int> { 7, 8, 22 });
-            Occidental_USA.AgregarInfo("Occidental USA", 0, 3, 1, 0, 0, 0, 30, false, new List<int> { 10, 30, 31, 34 });
+            Occidental_USA.AgregarInfo("Occidental USA", 0, 3, 1, 0, 0, 0, 30, false, new List<int> { 15, 10, 31, 5 });
             Ontario.AgregarInfo("Ontario", 0, 3, 2, 0, 0, 0, 31, true, new List<int> { 20, 38, 5, 15, 30, 34 });
             Oriente_Medio.AgregarInfo("Oriente Medio", 0, 3, 2, 0, 0, 0, 32, true, new List<int> { 21, 1, 39, 18, 13, 3 });
             Perú.AgregarInfo("Perú", 0, 3, 1, 0, 0, 0, 33, false, new List<int> { 6, 9, 41 });

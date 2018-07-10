@@ -358,7 +358,6 @@ namespace Juego_Risk
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            //FAlta Ataque 
             int tropasMovida;
             int id_seleccionado;
             int id_opcion;
@@ -368,21 +367,67 @@ namespace Juego_Risk
 
                 // Displays the MessageBox.
 
-                result = MessageBox.Show( "sellecione un Pais en: Opciones de Pais" , "ERROR");
+                result = MessageBox.Show("sellecione un Pais en: Opciones de Pais", "ERROR");
             }
             else
             {
-                tropasMovida = Convert.ToInt32(nUDtropas.Value);
-                string[] aux1= txtPaisSeleccionado.Text.Split('.');
-                string[] aux2 =CB_vecinos.SelectedItem.ToString().Split('.');
-                id_seleccionado = Convert.ToInt32(aux1[0]);
-                id_opcion = Convert.ToInt32(aux1[0]);
 
-                //Pertenencia 1 = Jugador
-                if (Tablero.Lista_Paises[id_opcion-1].Pertenencia==1)
+                tropasMovida = Convert.ToInt32(nUDtropas.Value);
+                string[] aux1 = txtPaisSeleccionado.Text.Split('.');
+                string[] aux2 = CB_vecinos.SelectedItem.ToString().Split('.');
+                id_seleccionado = Convert.ToInt32(aux1[0]);
+                id_opcion = Convert.ToInt32(aux2[0]);
+                int diferencia;
+
+                if (fase == 1)
                 {
-                    Tablero.Lista_Paises[id_opcion - 1].Tropas = Tablero.Lista_Paises[id_opcion - 1].Tropas - Tablero.Lista_Paises[id_seleccionado - 1].Tropas;
+                    diferencia = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
+                    if (diferencia >= 2)
+                    {
+                        Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
+
+
+                        Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                        Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
+                        if (Tablero.Lista_Paises[id_opcion - 1].Pertenencia == 2)
+                        {
+                            Tablero.Lista_Paises[id_opcion - 1].Tropas = diferencia;
+                        }
+                        else
+                        {
+                            Tablero.Lista_Paises[id_opcion - 1].Tropas += diferencia;
+                        }
+                        Listbtn[id_opcion].Text = Tablero.Lista_Paises[id_opcion - 1].Tropas.ToString();
+                        Tablero.Lista_Paises[id_opcion - 1].Pertenencia = 1;
+
+                    }
+                    else
+                    {
+                        Tablero.Lista_Paises[id_seleccionado - 1].Tropas -= tropasMovida;
+                        Listbtn[id_seleccionado].Text = Tablero.Lista_Paises[id_seleccionado - 1].Tropas.ToString();
+                        if (diferencia == 0)
+                        {
+                            Tablero.Lista_Paises[id_opcion - 1].Tropas -= tropasMovida;
+                        }
+                        else if (Tablero.Lista_Paises[id_opcion - 1].Pertenencia == 2 && Tablero.Lista_Paises[id_seleccionado - 1].Tropas >= 0)
+                        {
+                            Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
+                            int aux = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
+                            Tablero.Lista_Paises[id_opcion - 1].Tropas = aux;
+                        }
+                        else
+                        {
+                            Tablero.Lista_Paises[id_opcion - 1].Tropas += tropasMovida;
+                        }
+                        Listbtn[id_opcion].Text = (Tablero.Lista_Paises[id_opcion - 1].Tropas).ToString();
+
+
+                    }
+
                 }
+                txtPaisSeleccionado.Clear();
+                CB_vecinos.Items.Clear();
+                nUDtropas.Value = 0;
             }
         }
     }
