@@ -200,8 +200,8 @@ namespace Juego_Risk
 
         private void Btn_Empezar_Click(object sender, EventArgs e)
         {
-            
-            if (fase==0)
+
+            if (fase == 0)
             {
                 fase = 1;
                 panel1.Enabled = true;
@@ -213,7 +213,7 @@ namespace Juego_Risk
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Reforzamiento";
             }
-            else if(fase == 2)
+            else if (fase == 2)
             {
                 fase = 0;
                 panel1.Enabled = false;
@@ -223,8 +223,8 @@ namespace Juego_Risk
             {
                 /*Turno de la IA*/
 
-                Btn_Empezar.Enabled = false;  
-                panel1.Enabled = false; 
+                Btn_Empezar.Enabled = false;
+                panel1.Enabled = false;
                 //Ejecuta las acciones de la Inteligencia Artificial
                 lbljugadorname.Text = "IA";
 
@@ -236,7 +236,7 @@ namespace Juego_Risk
                 lbljugadorname.Text = Tablero.name;
                 lblAsignamiento.Text = "Asignación";
                 Btn_Empezar.Enabled = true;
-                
+
             }
         }
 
@@ -255,7 +255,7 @@ namespace Juego_Risk
             /* Avisar en que turno esta la IA*/
 
             /* Reinforcement */
-            IA_Reinforcement();
+            //IA_Reinforcement();
 
             /* Avisar en que la IA ha terminado su turno*/
         }
@@ -263,7 +263,7 @@ namespace Juego_Risk
         private void IA_Assignment()
         {
             lblAsignamiento.Text = "Asignación";
-           
+            playerIA.Assignment();
             var aux = playerIA.Assignments.Count();
             int country = 0;
 
@@ -272,7 +272,7 @@ namespace Juego_Risk
                 /* Debe retornar el id del pais al cual se le asigno el territorio
                 * para actualizarlo en el mapa visual, esto lo hace la cola */
                 country = playerIA.Assignments.Dequeue();
-                RefreshCountries(Tablero.Lista_Paises[country].Id_Pais, Tablero.Lista_Paises[country].Pertenencia, Tablero.Lista_Paises[country].Tropas);
+                RefreshCountries(Tablero.Lista_Paises[country - 1].Id_Pais, Tablero.Lista_Paises[country - 1].Pertenencia, Tablero.Lista_Paises[country - 1].Tropas);
                 //Si quieren.. debemos agregar un tiempo de retardo entre cambios
             }
         }
@@ -284,7 +284,7 @@ namespace Juego_Risk
 
             var aux = playerIA.Attacks.Count();
 
-            for(int i = 0; i<aux; i++)
+            for (int i = 0; i < aux; i++)
             {
                 /* Debo retornar un string de los 2 paises que se ven afectados 
                en el ataque de la forma: [2;5] */
@@ -328,20 +328,19 @@ namespace Juego_Risk
 
         private void RefreshCountries(int id, int pertenencia, int tropas)
         {
-            Listbtn[id-1].Text = tropas.ToString();
+            Listbtn[id].Text = tropas.ToString();
 
             switch (pertenencia)
             {
                 case 1: //Jugador
-                    Listbtn[id-1].BackColor = System.Drawing.Color.Green;
+                    Listbtn[id].BackColor = System.Drawing.Color.Green;
                     break;
 
                 case 2: //IA
-                    Listbtn[id-1].BackColor = System.Drawing.Color.Blue;
+                    Listbtn[id].BackColor = System.Drawing.Color.Blue;
                     break;
             }
         }
-
         private void nUDtropas_ValueChanged(object sender, EventArgs e)
         {
 

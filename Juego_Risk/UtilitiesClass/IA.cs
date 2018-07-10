@@ -60,14 +60,14 @@ namespace Juego_Risk.UtilitiesClass
             this.teacherAssignment = new C45Learning();
             this.teacherAttack = new C45Learning();
             this.teacherReinforcement = new C45Learning();
-            
+
             //paths of files data
             this.path_file_data_assignment = "training-data-assignment.csv";
             this.path_file_data_attack = "training-data-attack.csv";
             this.path_file_data_reinforcement = "training-data-reinforcement.csv";
 
             /* Training decision trees*/
-            //TrainingTreeAssignment();
+            TrainingTreeAssignment();
             //TrainingTreeAttack();
             //TrainingTreeReinforcement();
 
@@ -275,16 +275,16 @@ namespace Juego_Risk.UtilitiesClass
         {
             foreach (var country in territoriesAlly)
             {
-                data = world.Lista_Paises[country].Id_Pais.ToString() + ",";
-                data += world.Lista_Paises[country].Imp.ToString() + ",";
-                data += world.Jugador.Count.ToString() + ",";
-                data += (world.Lista_Paises.Count - world.IA.Count - world.Jugador.Count).ToString() + ",";
-                data += world.IA.Count.ToString() + ",";
-                data += world.Lista_Paises[country].Tropas.ToString() + ",";
-                data += world.IA.Count.ToString() + ",";
-                data += ThreatFactor(country);
+                data = world.Lista_Paises[country - 1].Id_Pais.ToString() + ";";
+                data += world.Lista_Paises[country - 1].Imp.ToString() + ";";
+                data += numero_Enemigos(country - 1) + ";";
+                data += numero_neutros(country - 1) + ";";
+                data += (world.Lista_Paises[country - 1].pais_vecinos.Count - numero_Enemigos(country - 1) - numero_neutros(country - 1) + ";");
+                data += world.Lista_Paises[country - 1].Tropas.ToString() + ";";
+                data += world.Jugador.Count + ";";
+                data += 0.05 * world.Lista_Paises[country - 1].Imp + FA(numero_Enemigos(country - 1), (world.Lista_Paises[country - 1].pais_vecinos.Count - numero_Enemigos(country - 1) - numero_neutros(country - 1)));
 
-                PredictAssignmentCountry(data);
+                world.Lista_Paises[country - 1].P_Asig = Convert.ToDouble(PredictAssignmentCountry(data));
             }
 
         }
@@ -328,6 +328,25 @@ namespace Juego_Risk.UtilitiesClass
 
         public void Assignment()
         {
+            PredictAllAssignment(world.IA.ToArray());
+            int ter = world.Jugador.Count;
+            int tropas = world.tropaAsigamiento;
+            int cantidad = Convert.ToInt16(ter * 0.33);
+            double suma = 0;
+            int t = tropas;
+            List<Pais> paises_escojer = world.Lista_Paises;
+            paises_escojer = paises_escojer.OrderByDescending(p => p.P_Asig).ToList();
+            for (int i = 0; i < cantidad; i++)
+            {
+                suma += paises_escojer[i].P_Asig;
+
+            }
+            for (int i = 0; i < cantidad; i++)
+            {
+                int valor = Convert.ToInt32(t * paises_escojer[i].P_Asig / suma);
+                world.Lista_Paises[paises_escojer[i].Id_Pais - 1].Tropas += valor;
+                Assignments.Enqueue(paises_escojer[i].Id_Pais);
+            }
 
         }
 
@@ -336,38 +355,31 @@ namespace Juego_Risk.UtilitiesClass
             return string.Empty;
         }
 
-        public string Reinforcement()
+        public void Reinforcement()
         {
-            int cont = 0, aux = 0, IDBrinda = 0, IDRecibe = 0 ;
+            int cont = 0, aux = 0;
             foreach (var item in world.Lista_Paises)
             {
-                for (int i = 0; i < world.IA.Count; i++)
+                if (world.Lista_Paises[cont].Id_Pais == world.IA[cont])
                 {
-                    if (world.Lista_Paises[cont].Id_Pais == world.IA[i])
+                    if (world.Lista_Paises[cont].P_Fort >= 0.8)
                     {
-                        if (world.Lista_Paises[cont].P_Fort >= 0.8)
+                        if (world.Lista_Paises[cont].Tropas > 3 && world.Lista_Paises[cont].Imp != 3)
                         {
-                            if (world.Lista_Paises[cont].Tropas > 3 && world.Lista_Paises[cont].Imp != 3)
-                            {
-                                IDBrinda = world.Lista_Paises[cont].Id_Pais;
-                                aux = world.Lista_Paises[cont].Tropas - 3;
-                                world.Lista_Paises[cont].Tropas = 3;
-                            }
+                            aux = world.Lista_Paises[cont].Tropas - 3;
+                            world.Lista_Paises[cont].Tropas = 3;
                         }
-                        else if (world.Lista_Paises[cont].P_Fort <= 0.2)
-                        {
-                            IDRecibe = world.Lista_Paises[cont].Id_Pais;
-                            world.Lista_Paises[cont].Tropas += aux;
-                        }
-
+                    }
+                    else if (world.Lista_Paises[cont].P_Fort <= 0.2)
+                    {
+                        world.Lista_Paises[cont].Tropas += aux;
                     }
 
                 }
-            }
 
                 cont++;
 
-            return IDBrinda + ";" + IDRecibe;
+            }
 
         }
 
@@ -400,8 +412,8 @@ namespace Juego_Risk.UtilitiesClass
                     result += 0.50;
 
             }
-            return result; 
-           
+            return result;
+
         }
 
         public double BenefitFactor(int count)
@@ -435,6 +447,66 @@ namespace Juego_Risk.UtilitiesClass
             }
             return result;
         }
+        public int numero_Enemigos(int id)
+        {
+            List<int> vecinos = world.Lista_Paises[id].pais_vecinos;
+            int count = 0;
+            for (int i = 0; i < vecinos.Count; i++)
+            {
+
+                if (world.Lista_Paises[vecinos[i] - 1].Pertenencia == 2)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int numero_neutros(int id)
+        {
+            List<int> vecinos = world.Lista_Paises[id].pais_vecinos;
+            int count = 0;
+            for (int i = 0; i < vecinos.Count; i++)
+            {
+
+                if (world.Lista_Paises[vecinos[i] - 1].Pertenencia == 3)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public double FA(int enemigos, int aliados)
+        {
+            int aux = enemigos - aliados;
+            double valor = 0;
+            if (aux < -5)
+            {
+                valor = 0.05;
+            }
+            else if (aux >= -5 & aux < -2)
+            {
+                valor = 0.11;
+            }
+            else if (aux >= -2 & aux < 0)
+            {
+                valor = 0.2;
+            }
+            else if (aux >= 0 & aux < 6)
+            {
+                valor = 0.3;
+
+            }
+            else if (aux >= 6 & aux < 11)
+            {
+                valor = 0.4;
+            }
+            else if (aux >= 11)
+            {
+                valor = 0.5;
+            }
+            return valor;
+        }
+
 
     }
 }

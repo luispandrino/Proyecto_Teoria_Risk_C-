@@ -14,7 +14,7 @@ namespace Juego_Risk.UtilitiesClass
         // 1 = Jugador; 2 = IA; 3 = neutro
         public int Pertenencia { get; set; }
         public int Imp { get; set; }
-        public int P_Asig { get; set; }
+        public double P_Asig { get; set; }
         public int P_ATK { get; set; }
         public int P_Fort { get; set; }
         public int Id_Pais { get; set; }
