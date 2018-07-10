@@ -703,9 +703,9 @@ namespace Juego_Risk.UtilitiesClass
             return string.Empty;
         }
 
-        public void Reinforcement()
+        public string Reinforcement()
         {
-            int cont = 0, aux = 0;
+            int cont = 0, aux = 0; int Recibe = 0; int Dona = 0;
             foreach (var item in world.Lista_Paises)
             {
                 for (int i = 0; i < world.IA.Count; i++)
@@ -718,11 +718,13 @@ namespace Juego_Risk.UtilitiesClass
                             {
                                 aux = world.Lista_Paises[cont].Tropas - 3;
                                 world.Lista_Paises[cont].Tropas = 3;
+                                Dona = world.Lista_Paises[cont].Id_Pais;
                             }
                         }
                         else if (world.Lista_Paises[cont].P_Fort <= 0.2)
                         {
                             world.Lista_Paises[cont].Tropas += aux;
+                            Recibe = world.Lista_Paises[cont].Id_Pais;
                         }
 
                     }
@@ -732,6 +734,7 @@ namespace Juego_Risk.UtilitiesClass
                 cont++;
 
             }
+            return Dona + ";" + Recibe;
 
         }
 
