@@ -415,7 +415,7 @@ namespace Juego_Risk.UtilitiesClass
                     break;
                 case 3:
                     world.Lista_Paises[attack[0] - 1].Tropas = 1;
-                    world.Lista_Paises[attack[1] - 1].Tropas = 1;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 2;
                     break;
                 case 4:
                     world.Lista_Paises[attack[0] - 1].Tropas = 2;
@@ -426,8 +426,8 @@ namespace Juego_Risk.UtilitiesClass
                     world.Lista_Paises[attack[1] - 1].Tropas = 3;
                     break;
                 case 6:
-                    world.Lista_Paises[attack[0]].Tropas = 2;
-                    world.Lista_Paises[attack[1]].Tropas = 4;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 2;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 4;
                     break;
                 case 7:
                     world.Lista_Paises[attack[0] - 1].Tropas = 3;
@@ -495,8 +495,8 @@ namespace Juego_Risk.UtilitiesClass
                     world.Lista_Paises[attack[1] - 1].Tropas = 2;
                     break;
                 case -3:
-                    world.Lista_Paises[attack[0]].Tropas = 0;
-                    world.Lista_Paises[attack[1]].Tropas = 3;
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 3;
                     break;
                 case -4:
                     world.Lista_Paises[attack[0] - 1].Tropas = 0;
@@ -671,7 +671,7 @@ namespace Juego_Risk.UtilitiesClass
         public void Assignment()
         {
             PredictAllAssignment(world.IA.ToArray());
-            world.tropaAsigamiento = 10;
+       
             int ter = world.Jugador.Count;
             int tropas = world.tropaAsigamiento;
             int cantidad = Convert.ToInt16(ter * 0.33);
@@ -696,11 +696,6 @@ namespace Juego_Risk.UtilitiesClass
                 world.Lista_Paises[paises_escojer[0].Id_Pais - 1].Tropas += tropas;
             }
 
-        }
-
-        public string Attack()
-        {
-            return string.Empty;
         }
 
         public string Reinforcement()
@@ -734,6 +729,7 @@ namespace Juego_Risk.UtilitiesClass
                 cont++;
 
             }
+
             return Dona + ";" + Recibe;
 
         }

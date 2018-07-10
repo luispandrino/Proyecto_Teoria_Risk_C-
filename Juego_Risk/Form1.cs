@@ -245,7 +245,7 @@ namespace Juego_Risk
                 panel1.Enabled = false;
                 //Ejecuta las acciones de la Inteligencia Artificial
                 lbljugadorname.Text = "IA";
-                Tablero.tropaAsigamiento = 10;
+                calcular_tropas(1);
                 lblAsignamiento.Text = "Asignación";
                 timer1.Enabled = true;
                 /* Inicia jugada */
@@ -403,7 +403,7 @@ namespace Juego_Risk
                 if (fase == 1 || fase== 3)
                 {
                     diferencia = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
-                    if (diferencia >= 2)
+                    if (diferencia >= 1)
                     {
                         Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
 
@@ -513,11 +513,6 @@ namespace Juego_Risk
             }
             else if (lblAsignamiento.Text == "Ataque")
             {
-                if (contador == 0)
-                {
-
-
-                }
                 if (contador < auxtimer)
                 {
                     string countries = playerIA.Attacks.Dequeue();
@@ -544,11 +539,6 @@ namespace Juego_Risk
             }
             else if (lblAsignamiento.Text == "Reforzamiento")
             {
-                if (contador == 0)
-                {
-
-
-                }
                 if (contador < auxtimer)
                 {
                     string countries = playerIA.Reinforcements.Dequeue();
@@ -568,6 +558,7 @@ namespace Juego_Risk
                 {
                     lblAsignamiento.Text = "Asignación";
                     fase = 0;
+                    calcular_tropas(0);
                     lbljugadorname.Text = Tablero.name;
                     Btn_Empezar.Enabled = true;
                     contador = 0;
@@ -575,6 +566,51 @@ namespace Juego_Risk
                 }
             }
 
+        }
+
+        public void calcular_tropas(int jugador)
+        {
+            
+            
+            if(jugador==0)
+            {
+                if (Tablero.Jugador.Count < 6)
+                {
+                    Tablero.tropaAsigamiento = 5;
+                }
+                else if (Tablero.Jugador.Count >= 6 & Tablero.Jugador.Count < 11)
+                {
+                    Tablero.tropaAsigamiento = 10;
+                }
+                else if (Tablero.Jugador.Count >= 11 & Tablero.Jugador.Count < 15)
+                {
+                    Tablero.tropaAsigamiento = 15;
+                }
+                else if (Tablero.Jugador.Count >= 15)
+                {
+                    Tablero.tropaAsigamiento = 20;
+                }
+            }
+            else
+            {
+                if (Tablero.IA.Count < 6)
+                {
+                    Tablero.tropaAsigamiento = 5;
+                }
+                else if (Tablero.IA.Count >= 6 & Tablero.Jugador.Count < 11)
+                {
+                    Tablero.tropaAsigamiento = 10;
+                }
+                else if (Tablero.IA.Count >= 11 & Tablero.Jugador.Count < 15)
+                {
+                    Tablero.tropaAsigamiento = 15;
+                }
+                else if (Tablero.IA.Count >= 15)
+                {
+                    Tablero.tropaAsigamiento = 20;
+                }
+            }
+            
         }
     }
 }
