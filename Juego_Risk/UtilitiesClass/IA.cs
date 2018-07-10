@@ -331,16 +331,36 @@ namespace Juego_Risk.UtilitiesClass
 
         public void Attack(List<int> Allies)
         {
+            //Ataques mayores a 0.75
             var attacks = PossiblesAttacks(Allies);
             //var bestAttacks = FilterAttacks(temp1);
 
-            //Execute attacks
-            foreach (var attack in attacks)
+            if (attacks.Count > 0)
             {
-                if (CheckAttack(attack))
+                //Execute attacks
+                foreach (var attack in attacks)
                 {
-                    ExecuteAttack(attack);
+                    if (CheckAttack(attack))
+                    {
+                        ExecuteAttack(attack);
+                    }
                 }
+            }
+            else
+            {
+                //Ataques de 0.30 a 0.60
+                //Tecnicamente cuando la maquina este perdiendo
+                attacks = PossiblesLowAttacks(Allies);
+
+                //Execute attacks
+                foreach (var attack in attacks)
+                {
+                    if (CheckLowAttack(attack))
+                    {
+                        ExecuteLowAttack(attack);
+                    }
+                }
+
             }
 
         }
@@ -353,6 +373,22 @@ namespace Juego_Risk.UtilitiesClass
             if (countryE.Pertenencia == 1 || countryE.Pertenencia == 3)
             {
                 if ((countryA.Tropas - countryE.Tropas) >= 2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool CheckLowAttack(int[] attack)
+        {
+            var countryA = world.Lista_Paises[attack[0] - 1];
+            var countryE = world.Lista_Paises[attack[1] - 1];
+
+            if (countryE.Pertenencia == 1 || countryE.Pertenencia == 3)
+            {
+                if (((countryA.Tropas - countryE.Tropas) <= 1) && ((countryA.Tropas - countryE.Tropas) >= -4))
                 {
                     return true;
                 }
@@ -426,6 +462,50 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
+        private void ExecuteLowAttack(int[] attack)
+        {
+            int rest = world.Lista_Paises[attack[0] - 1].Tropas - world.Lista_Paises[attack[1] - 1].Tropas;
+            Attacks.Enqueue(attack[0].ToString() + ";" + attack[1].ToString());
+
+            if (rest >= 1)
+            {
+                world.Lista_Paises[attack[1] - 1].Pertenencia = 2;
+
+                //Movimiento de territorios entre jugadores
+                world.IA.Add(attack[1]);
+                world.Jugador.Remove(attack[1]);
+            }
+
+            switch (rest)
+            {
+                case 1:
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 1;
+                    break;
+                case 0:
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 0;
+                    break;
+                case -1:
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 1;
+                    break;
+                case -2:
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 2;
+                    break;
+                case -3:
+                    world.Lista_Paises[attack[0]].Tropas = 0;
+                    world.Lista_Paises[attack[1]].Tropas = 3;
+                    break;
+                case -4:
+                    world.Lista_Paises[attack[0] - 1].Tropas = 0;
+                    world.Lista_Paises[attack[1] - 1].Tropas = 4;
+                    break;
+
+            }
+        }
+
         private List<int[]> PossiblesAttacks(List<int> countries)
         {
             List<int[]> possibles = new List<int[]>();
@@ -455,7 +535,48 @@ namespace Juego_Risk.UtilitiesClass
                             break;
 
                         case 3:
-                            if (countryNeighbour.P_ATK >= 0.75)
+                            if (countryNeighbour.P_ATK >= 0.80)
+                            {
+                                possibles.Add(new int[] { country.Id_Pais, countryNeighbour.Id_Pais });
+                            }
+                            break;
+                    }
+                }
+            }
+
+            return possibles;
+        }
+
+        private List<int[]> PossiblesLowAttacks(List<int> countries)
+        {
+            List<int[]> possibles = new List<int[]>();
+
+            foreach (var element in countries)
+            {
+                Pais country = world.Lista_Paises[element - 1];
+
+                foreach (var neighbour in country.pais_vecinos)
+                {
+                    Pais countryNeighbour = world.Lista_Paises[neighbour - 1];
+                    int diferenciaTropas = 0;
+
+                    switch (countryNeighbour.Pertenencia)
+                    {
+                        case 1:
+
+                            if (countryNeighbour.P_ATK >= 0.30 && countryNeighbour.P_ATK <= 0.70)
+                            {
+                                diferenciaTropas = country.Tropas - countryNeighbour.Tropas;
+
+                                if (diferenciaTropas <= 1 && diferenciaTropas >= -4)
+                                {
+                                    possibles.Add(new int[] { country.Id_Pais, countryNeighbour.Id_Pais });
+                                }
+                            }
+                            break;
+
+                        case 3:
+                            if (countryNeighbour.P_ATK >= 0.40 && countryNeighbour.P_ATK <= 0.75)
                             {
                                 possibles.Add(new int[] { country.Id_Pais, countryNeighbour.Id_Pais });
                             }
