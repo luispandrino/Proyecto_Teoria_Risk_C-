@@ -15,7 +15,7 @@ namespace Juego_Risk.UtilitiesClass
         public int Pertenencia { get; set; }
         public int Imp { get; set; }
         public double P_Asig { get; set; }
-        public int P_ATK { get; set; }
+        public double P_ATK { get; set; }
         public int P_Fort { get; set; }
         public int Id_Pais { get; set; }
         public bool Orilla { get; set; }
