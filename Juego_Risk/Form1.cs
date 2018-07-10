@@ -421,6 +421,8 @@ namespace Juego_Risk
                         }
                         Listbtn[id_opcion].Text = Tablero.Lista_Paises[id_opcion - 1].Tropas.ToString();
                         Tablero.Lista_Paises[id_opcion - 1].Pertenencia = 1;
+                        Tablero.Jugador.Add(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
+                        Tablero.IA.Remove(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
 
                     }
                     else
@@ -445,6 +447,15 @@ namespace Juego_Risk
                                 Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
                                 int aux = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
                                 Tablero.Lista_Paises[id_opcion - 1].Tropas = aux;
+                                Tablero.Jugador.Add(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
+                                Tablero.IA.Remove(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
+                            }
+                            else if (Tablero.Lista_Paises[id_opcion - 1].Pertenencia == 3)
+                            {
+                                Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
+                                Tablero.Lista_Paises[id_opcion - 1].Tropas += tropasMovida;
+                                Tablero.Jugador.Add(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
+                                Tablero.IA.Remove(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
                             }
                             else
                             {
