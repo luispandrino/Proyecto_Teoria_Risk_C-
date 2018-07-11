@@ -653,11 +653,11 @@ namespace Juego_Risk
                 {
                     Tablero.tropaAsigamiento = 5;
                 }
-                else if (Tablero.IA.Count >= 6 & Tablero.Jugador.Count < 11)
+                else if (Tablero.IA.Count >= 6 & Tablero.IA.Count < 11)
                 {
                     Tablero.tropaAsigamiento = 10;
                 }
-                else if (Tablero.IA.Count >= 11 & Tablero.Jugador.Count < 15)
+                else if (Tablero.IA.Count >= 11 & Tablero.IA.Count < 15)
                 {
                     Tablero.tropaAsigamiento = 15;
                 }
