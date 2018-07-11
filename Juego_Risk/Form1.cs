@@ -89,6 +89,7 @@ namespace Juego_Risk
             lblAsignamiento.Text = "Asignación";
 
             btnBestMovement.Enabled = false;
+            too_trip();
         }
         /// <summary>
         /// Metodo que reparte los territorios iniciales a cada jugador
@@ -144,6 +145,17 @@ namespace Juego_Risk
                 Listbtn[i].Click += new System.EventHandler(this.Evento_Generico);
             }
 
+        }
+
+        //Evento que controla los til  
+        public void too_trip()
+        {
+            ToolTip generic = new ToolTip();
+            for (int i = 1; i < 43; i++)
+            {
+                generic.SetToolTip(Listbtn[i], Tablero.Lista_Paises[i - 1].Nombre);
+            }
+            
         }
 
         //Evento que controla los botones
