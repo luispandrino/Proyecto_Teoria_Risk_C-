@@ -89,6 +89,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lblAsignamiento = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ckBAutoTraining = new System.Windows.Forms.CheckBox();
+            this.btnBestMovement = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).BeginInit();
@@ -726,6 +728,26 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // ckBAutoTraining
+            // 
+            this.ckBAutoTraining.AutoSize = true;
+            this.ckBAutoTraining.Location = new System.Drawing.Point(12, 411);
+            this.ckBAutoTraining.Name = "ckBAutoTraining";
+            this.ckBAutoTraining.Size = new System.Drawing.Size(150, 17);
+            this.ckBAutoTraining.TabIndex = 76;
+            this.ckBAutoTraining.Text = "Entrenamiento Automatico";
+            this.ckBAutoTraining.UseVisualStyleBackColor = true;
+            // 
+            // btnBestMovement
+            // 
+            this.btnBestMovement.Location = new System.Drawing.Point(41, 454);
+            this.btnBestMovement.Name = "btnBestMovement";
+            this.btnBestMovement.Size = new System.Drawing.Size(101, 23);
+            this.btnBestMovement.TabIndex = 77;
+            this.btnBestMovement.Text = "Mejores Movimiento";
+            this.btnBestMovement.UseVisualStyleBackColor = true;
+            this.btnBestMovement.Click += new System.EventHandler(this.btnBestMovement_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -734,6 +756,8 @@
             this.BackgroundImage = global::Juego_Risk.Properties.Resources.Mapa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1173, 554);
+            this.Controls.Add(this.btnBestMovement);
+            this.Controls.Add(this.ckBAutoTraining);
             this.Controls.Add(this.lblAsignamiento);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel1);
@@ -858,6 +882,8 @@
         private System.Windows.Forms.NumericUpDown nUDtropas;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox ckBAutoTraining;
+        private System.Windows.Forms.Button btnBestMovement;
     }
 }
 

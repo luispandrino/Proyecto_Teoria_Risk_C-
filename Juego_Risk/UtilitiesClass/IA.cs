@@ -221,6 +221,23 @@ namespace Juego_Risk.UtilitiesClass
             return answer;
         }
 
+        private string PredictAttack(string data)
+        {
+            /* Example variable data: "13;2;0;1;3;8" */
+            var aux = data.Split(';');
+            double[] query = new double[aux.Length];
+
+            for (int i = 0; i < query.Length; i++)
+            {
+                query[i] = double.Parse(aux[i]);
+            }
+
+            int predicted = this.treeAttack.Decide(query);
+            string answer = this.codebookAttack.Revert("Output", predicted);
+
+            return answer;
+        }
+
         private string PredictReinforcementCountry(string data)
         {
             /* Example variable data: "13;2;0;1;3;8;0.6" */
@@ -242,32 +259,29 @@ namespace Juego_Risk.UtilitiesClass
         }
 
         /* Public Classes */
-        public void AutoTraining(bool winner)
+        public void AutoTraining()
         {
-            if (winner)
+            //Add new  data for phase of assignment
+            using (StreamWriter sw = File.AppendText(path_file_data_assignment))
             {
-                //Add new  data for phase of assignment
-                using (StreamWriter sw = File.AppendText(path_file_data_assignment))
-                {
-                    sw.Write(newDataAssignment);
-                    sw.Close();
-                }
-
-                //Add new data for phase of attack
-                using (StreamWriter sw = File.AppendText(path_file_data_attack))
-                {
-                    sw.Write(newDataAttack);
-                    sw.Close();
-                }
-
-                //Add new data for phase of reinforcement
-                using (StreamWriter sw = File.AppendText(path_file_data_reinforcement))
-                {
-                    sw.Write(newDataReinforcement);
-                    sw.Close();
-                }
-
+                sw.Write(newDataAssignment);
+                sw.Close();
             }
+
+            //Add new data for phase of attack
+            using (StreamWriter sw = File.AppendText(path_file_data_attack))
+            {
+                sw.Write(newDataAttack);
+                sw.Close();
+            }
+
+            //Add new data for phase of reinforcement
+            using (StreamWriter sw = File.AppendText(path_file_data_reinforcement))
+            {
+                sw.Write(newDataReinforcement);
+                sw.Close();
+            }
+
         }
 
         /* Prediction Functions, All Countries o Territories*/
@@ -324,10 +338,51 @@ namespace Juego_Risk.UtilitiesClass
                 data += neutros.ToString();
 
                 //Prediction
+
                 world.Lista_Paises[country - 1].P_ATK = double.Parse(PredictAttackCountry(data));
             }
 
         }
+
+        public void PredictEnemyAttacks(List<int> territoriesAlly)
+        {
+            List<int> territoriesEnemy = new List<int>();
+
+            //Agrega paises neutros y enemigos a la lista
+            foreach (var country in world.Lista_Paises)
+            {
+                if (!territoriesAlly.Contains(country.Id_Pais))
+                {
+                    territoriesEnemy.Add(country.Id_Pais);
+                }
+            }
+
+            //Analisis para cada territorio enemigo
+            foreach (var country in territoriesEnemy)
+            {
+                int neutros = 0;
+                int enemigos = 0;
+                foreach (var element in world.Lista_Paises[country - 1].pais_vecinos)
+                {
+                    switch (world.Lista_Paises[element - 1].Pertenencia)
+                    {
+                        case 1: enemigos++; break;
+                        case 3: neutros++; break;
+                    }
+                }
+
+                data = world.Lista_Paises[country - 1].Id_Pais.ToString() + ";";
+                data += world.Lista_Paises[country - 1].Tropas.ToString() + ";";
+                data += (world.Lista_Paises[country - 1].Pertenencia == 3) ? "0.5;" : "1;";
+                data += enemigos.ToString() + ";";
+                data += world.Lista_Paises[country - 1].Imp.ToString() + ";";
+                data += neutros.ToString();
+
+                //Prediction
+                world.Lista_Paises[country - 1].P_ATK = double.Parse(PredictAttack(data));
+            }
+        }
+
 
         public void Attack(List<int> Allies)
         {
@@ -365,12 +420,28 @@ namespace Juego_Risk.UtilitiesClass
 
         }
 
-        private bool CheckAttack(int[] attack)
+        public bool CheckAttack(int[] attack)
         {
             var countryA = world.Lista_Paises[attack[0] - 1];
             var countryE = world.Lista_Paises[attack[1] - 1];
 
             if (countryE.Pertenencia == 1 || countryE.Pertenencia == 3)
+            {
+                if ((countryA.Tropas - countryE.Tropas) >= 2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool CheckAttackEnemy(int[] attack)
+        {
+            var countryA = world.Lista_Paises[attack[0] - 1];
+            var countryE = world.Lista_Paises[attack[1] - 1];
+
+            if (countryE.Pertenencia == 2 || countryE.Pertenencia == 3)
             {
                 if ((countryA.Tropas - countryE.Tropas) >= 2)
                 {
@@ -506,7 +577,7 @@ namespace Juego_Risk.UtilitiesClass
             }
         }
 
-        private List<int[]> PossiblesAttacks(List<int> countries)
+        public List<int[]> PossiblesAttacks(List<int> countries)
         {
             List<int[]> possibles = new List<int[]>();
 
@@ -631,10 +702,6 @@ namespace Juego_Risk.UtilitiesClass
                             }
                         }
 
-                        if (element[0] == element2[0])
-                        {
-
-                        }
                     }
                 }
 

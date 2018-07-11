@@ -25,5 +25,11 @@ namespace Juego_Risk.UtilitiesClass
 
         /* Add the class map with all countries */
         public Mapa map = new Mapa();
+
+        public void CleanMap()
+        {
+            map = new Mapa();
+        }
+
     }
 }

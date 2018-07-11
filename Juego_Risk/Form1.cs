@@ -26,7 +26,6 @@ namespace Juego_Risk
         int contador = 0;
         int auxtimer = 0;
 
-
         public Form1()
         {
 
@@ -88,6 +87,8 @@ namespace Juego_Risk
 
             panel1.Enabled = false;
             lblAsignamiento.Text = "Asignación";
+
+            btnBestMovement.Enabled = false;
         }
         /// <summary>
         /// Metodo que reparte los territorios iniciales a cada jugador
@@ -134,6 +135,7 @@ namespace Juego_Risk
 
 
         }
+
         //manejador del Evento generico para los 42 botones
         public void Eventos_botones()
         {
@@ -143,6 +145,7 @@ namespace Juego_Risk
             }
 
         }
+
         //Evento que controla los botones
         private void Evento_Generico(object sender, EventArgs e)
         {
@@ -186,7 +189,13 @@ namespace Juego_Risk
                 {
                     for (int i = 0; i < Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos.Count; i++)
                     {
-                        CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "."+Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                        if (Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i]-1].Pertenencia != 1)
+                        {
+                            CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "." + Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                        }
+                           
+
+                        
                     }
                     nUDtropas.Maximum = Tablero.Lista_Paises[Id_encontrado - 1].Tropas;
                 }
@@ -203,7 +212,11 @@ namespace Juego_Risk
                         {
                             if (Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] == Tablero.Jugador[j])
                             {
-                                CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "." + Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                                if (Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Pertenencia != 1)
+                                {
+                                    CB_vecinos.Items.Add(Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] + "." + Tablero.Lista_Paises[Tablero.Lista_Paises[Id_encontrado - 1].pais_vecinos[i] - 1].Nombre);
+                                }
+
                             }
                         }
                     }
@@ -224,18 +237,21 @@ namespace Juego_Risk
                 fase = 1;
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Ataque";
+                btnBestMovement.Enabled = true;
             }
             else if (fase == 1)
             {
                 fase = 3;
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Reforzamiento";
+                btnBestMovement.Enabled = false;
             }
             else if (fase == 2)
             {
                 fase = 0;
                 panel1.Enabled = false;
                 lblAsignamiento.Text = "Asignación";
+                btnBestMovement.Enabled = false;
             }
             else
             {
@@ -447,6 +463,7 @@ namespace Juego_Risk
                                 Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
                                 int aux = tropasMovida - Tablero.Lista_Paises[id_opcion - 1].Tropas;
                                 Tablero.Lista_Paises[id_opcion - 1].Tropas = aux;
+                                Tablero.Lista_Paises[id_opcion - 1].Pertenencia = 1;
                                 Tablero.Jugador.Add(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
                                 Tablero.IA.Remove(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
                             }
@@ -454,6 +471,7 @@ namespace Juego_Risk
                             {
                                 Listbtn[id_opcion].BackColor = System.Drawing.Color.Green;
                                 Tablero.Lista_Paises[id_opcion - 1].Tropas += tropasMovida;
+                                Tablero.Lista_Paises[id_opcion - 1].Pertenencia = 1;
                                 Tablero.Jugador.Add(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
                                 Tablero.IA.Remove(Tablero.Lista_Paises[id_opcion - 1].Id_Pais);
                             }
@@ -526,6 +544,16 @@ namespace Juego_Risk
                 txtPaisSeleccionado.Clear();
                 CB_vecinos.Items.Clear();
                 nUDtropas.Value = 0;
+
+                if (Tablero.Jugador.Count == 42)
+                {
+                    MessageBox.Show("Has ganado la partida.!!",
+                                    "Partida Terminada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (ckBAutoTraining.Checked) { playerIA.AutoTraining(); }
+
+                    FinishGame();
+                }
             }
         }
 
@@ -583,6 +611,16 @@ namespace Juego_Risk
 
                     //Tiempo de retardo entre cambios
                     contador++;
+
+                    if (Tablero.IA.Count == 42)
+                    {
+                        MessageBox.Show("Has perdido la partida.",
+                                        "Partida Terminada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if (ckBAutoTraining.Checked) { playerIA.AutoTraining(); }
+                        timer1.Enabled = false;
+                        FinishGame();
+                    }
                 }
                 else
                 {
@@ -618,7 +656,7 @@ namespace Juego_Risk
                     lbljugadorname.Text = Tablero.name;
                     Btn_Empezar.Enabled = true;
                     contador = 0;
-                    timer1.Enabled = false;
+                    timer1.Enabled = false;         
                 }
             }
 
@@ -667,6 +705,98 @@ namespace Juego_Risk
                 }
             }
             
+        }
+
+        public void FinishGame()
+        {
+            //Init components
+            Listbtn = new Dictionary<int, Button>();
+            playerIA = new IA();
+            fase = 0;
+            jugador = 0;
+            nombre = string.Empty;
+            contador = 0;
+            auxtimer = 0;
+
+            Singleton.Instance.CleanMap();
+            InitializeComponent();
+            //variable que guarda el nombre del jugador
+            // Ciclo que se encarga de verificar que ingresen un nombre
+            do
+            {
+                nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre porfavor :", "Risk", ""));
+                lbljugadorname.Text = nombre;
+            } while (nombre == "");
+
+            //Diccionario con los botones que representan a cada pais
+            Listbtn.Add(1, Btn_Afganistan);
+            Listbtn.Add(2, Btn_AfricaN);
+            Listbtn.Add(3, Btn_AfricaOriente);
+            Listbtn.Add(4, Btn_Alaska);
+            Listbtn.Add(5, Btn_Alberta);
+            Listbtn.Add(6, Btn_Argentina);
+            Listbtn.Add(7, Btn_AustraliaOccidental);
+            Listbtn.Add(8, Btn_AustraliaOriental);
+            Listbtn.Add(9, Btn_Brazil);
+            Listbtn.Add(10, Btn_CA);
+            Listbtn.Add(11, Btn_China);
+            Listbtn.Add(12, Btn_Congo);
+            Listbtn.Add(13, Btn_Egipto);
+            Listbtn.Add(14, Btn_Escandinavia);
+            Listbtn.Add(15, Btn_USAEste);
+            Listbtn.Add(16, Btn_EUANorte);
+            Listbtn.Add(17, Btn_EUAOccidental);
+            Listbtn.Add(18, Btn_EUASur);
+            Listbtn.Add(19, Btn_GranBretaña);
+            Listbtn.Add(20, Btn_Groenlandia);
+            Listbtn.Add(21, Btn_India);
+            Listbtn.Add(22, Btn_Indonecia);
+            Listbtn.Add(23, Btn_Irkutsk);
+            Listbtn.Add(24, Btn_Islandia);
+            Listbtn.Add(25, Btn_Japon);
+            Listbtn.Add(26, Kamchatka);
+            Listbtn.Add(27, Btn_Madagascar);
+            Listbtn.Add(28, Btn_Mongolia);
+            Listbtn.Add(29, Btn_NuevaGuinea);
+            Listbtn.Add(30, Btn_USAOccidental);
+            Listbtn.Add(31, Btn_Ontario);
+            Listbtn.Add(32, Btn_OrienteMed);
+            Listbtn.Add(33, Btn_Peru);
+            Listbtn.Add(34, Btn_Quebec);
+            Listbtn.Add(35, Btn_Siam);
+            Listbtn.Add(36, Btn_Siberia);
+            Listbtn.Add(37, Btn_Sudafrica);
+            Listbtn.Add(38, Btn_TNorte);
+            Listbtn.Add(39, Btn_Ucrania);
+            Listbtn.Add(40, Btn_Ural);
+            Listbtn.Add(41, Btn_Venezuela);
+            Listbtn.Add(42, Btn_Yakutks);
+            initializer_terrtorios();
+            Eventos_botones();
+            lblASignar.Text = "10";
+
+            panel1.Enabled = false;
+            lblAsignamiento.Text = "Asignación";
+            btnBestMovement.Enabled = false;
+
+        }
+
+        private void btnBestMovement_Click(object sender, EventArgs e)
+        {
+            string message = string.Empty;
+
+            playerIA.PredictEnemyAttacks(Tablero.Jugador);
+            var attacks = playerIA.PossiblesAttacks(Tablero.Jugador);
+
+            foreach (var attack in attacks)
+            {
+                if (playerIA.CheckAttackEnemy(attack))
+                {
+                    message += "Atacar al país: " + Tablero.Lista_Paises[attack[1]-1].Nombre + " desde el país: " + Tablero.Lista_Paises[attack[0]-1].Nombre + ".\n";
+                }
+            }
+
+            MessageBox.Show("Mejores movimientos de ataque recomendados: \n\n" + message, "Fase de Ataque", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
