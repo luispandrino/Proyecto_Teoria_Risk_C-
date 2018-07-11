@@ -605,7 +605,7 @@ namespace Juego_Risk
                     //Tiempo de retardo entre cambios 
 
                     int aux2 = int.Parse(countries.Split(';')[1]);
-                    RefreshCountries(Tablero.Lista_Paises[aux2].Id_Pais, Tablero.Lista_Paises[aux2].Pertenencia, Tablero.Lista_Paises[aux2].Tropas);
+                    RefreshCountries(Tablero.Lista_Paises[aux2-1].Id_Pais, Tablero.Lista_Paises[aux2-1].Pertenencia, Tablero.Lista_Paises[aux2-1].Tropas);
 
                     //Tiempo de retardo entre cambios
                     contador++;
