@@ -672,9 +672,9 @@ namespace Juego_Risk.UtilitiesClass
         {
             PredictAllAssignment(world.IA.ToArray());
        
-            int ter = world.Jugador.Count;
+            int ter = world.IA.Count;
             int tropas = world.tropaAsigamiento;
-            int cantidad = Convert.ToInt16(ter * 0.33);
+            int cantidad = Convert.ToInt16(Math.Round(ter * 0.33,0));
             double suma = 0;
             int t = tropas;
             List<Pais> paises_escojer = world.Lista_Paises;
@@ -686,7 +686,7 @@ namespace Juego_Risk.UtilitiesClass
             }
             for (int i = 0; i < cantidad; i++)
             {
-                int valor = Convert.ToInt32(t * paises_escojer[i].P_Asig / suma);
+                int valor = Convert.ToInt32(Math.Round(t * paises_escojer[i].P_Asig / suma, 0));
                 tropas -= valor;
                 world.Lista_Paises[paises_escojer[i].Id_Pais - 1].Tropas += valor;
                 Assignments.Enqueue(paises_escojer[i].Id_Pais);
