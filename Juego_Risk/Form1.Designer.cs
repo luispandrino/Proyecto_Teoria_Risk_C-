@@ -73,7 +73,6 @@
             this.Btn_Indonecia = new System.Windows.Forms.Button();
             this.Btn_NuevaGuinea = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Btn_Empezar = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -83,14 +82,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblASignar = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMovimiento = new System.Windows.Forms.Label();
             this.nUDtropas = new System.Windows.Forms.NumericUpDown();
+            this.btnBestMovement = new System.Windows.Forms.Button();
             this.txtPaisSeleccionado = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lblAsignamiento = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ckBAutoTraining = new System.Windows.Forms.CheckBox();
-            this.btnBestMovement = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDtropas)).BeginInit();
@@ -570,25 +572,14 @@
             this.label1.TabIndex = 64;
             this.label1.Text = "Iniciar Juego / Avanzar de fase";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 17);
-            this.label2.TabIndex = 64;
-            this.label2.Text = "Iniciar Juego / Terminar Fase";
-            // 
             // Btn_Empezar
             // 
             this.Btn_Empezar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Empezar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Empezar.BackgroundImage")));
             this.Btn_Empezar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Btn_Empezar.Location = new System.Drawing.Point(5, 70);
+            this.Btn_Empezar.Location = new System.Drawing.Point(39, 50);
             this.Btn_Empezar.Name = "Btn_Empezar";
-            this.Btn_Empezar.Size = new System.Drawing.Size(91, 69);
+            this.Btn_Empezar.Size = new System.Drawing.Size(91, 66);
             this.Btn_Empezar.TabIndex = 63;
             this.Btn_Empezar.TabStop = false;
             this.Btn_Empezar.Click += new System.EventHandler(this.Btn_Empezar_Click);
@@ -596,7 +587,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 35);
+            this.label3.Location = new System.Drawing.Point(6, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 66;
@@ -605,7 +596,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 83);
+            this.label4.Location = new System.Drawing.Point(6, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 67;
@@ -615,7 +606,7 @@
             // 
             this.CB_vecinos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_vecinos.FormattingEnabled = true;
-            this.CB_vecinos.Location = new System.Drawing.Point(16, 105);
+            this.CB_vecinos.Location = new System.Drawing.Point(17, 87);
             this.CB_vecinos.Name = "CB_vecinos";
             this.CB_vecinos.Size = new System.Drawing.Size(121, 21);
             this.CB_vecinos.TabIndex = 68;
@@ -625,21 +616,22 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(723, 9);
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(188, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 17);
+            this.label5.Size = new System.Drawing.Size(135, 22);
             this.label5.TabIndex = 69;
-            this.label5.Text = "Nombre:";
+            this.label5.Text = "Turno Jugador:";
             // 
             // lbljugadorname
             // 
             this.lbljugadorname.AutoSize = true;
             this.lbljugadorname.BackColor = System.Drawing.Color.Transparent;
-            this.lbljugadorname.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbljugadorname.Location = new System.Drawing.Point(783, 9);
+            this.lbljugadorname.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbljugadorname.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lbljugadorname.Location = new System.Drawing.Point(322, 9);
             this.lbljugadorname.Name = "lbljugadorname";
-            this.lbljugadorname.Size = new System.Drawing.Size(219, 17);
+            this.lbljugadorname.Size = new System.Drawing.Size(227, 20);
             this.lbljugadorname.TabIndex = 70;
             this.lbljugadorname.Text = "Iniciar Juego / Terminar Fase";
             // 
@@ -647,54 +639,77 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(2, 26);
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(190, 34);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(142, 17);
+            this.label6.Size = new System.Drawing.Size(71, 22);
             this.label6.TabIndex = 71;
-            this.label6.Text = "Tropas disponibles:";
+            this.label6.Text = "Tropas:";
             // 
             // lblASignar
             // 
             this.lblASignar.AutoSize = true;
             this.lblASignar.BackColor = System.Drawing.Color.Transparent;
-            this.lblASignar.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblASignar.Location = new System.Drawing.Point(150, 26);
+            this.lblASignar.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblASignar.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblASignar.Location = new System.Drawing.Point(261, 34);
             this.lblASignar.Name = "lblASignar";
-            this.lblASignar.Size = new System.Drawing.Size(0, 17);
+            this.lblASignar.Size = new System.Drawing.Size(0, 21);
             this.lblASignar.TabIndex = 72;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblMovimiento);
             this.panel1.Controls.Add(this.nUDtropas);
+            this.panel1.Controls.Add(this.btnBestMovement);
             this.panel1.Controls.Add(this.txtPaisSeleccionado);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.CB_vecinos);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(5, 169);
+            this.panel1.Location = new System.Drawing.Point(12, 204);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(174, 209);
+            this.panel1.Size = new System.Drawing.Size(165, 257);
             this.panel1.TabIndex = 73;
+            // 
+            // lblMovimiento
+            // 
+            this.lblMovimiento.AutoSize = true;
+            this.lblMovimiento.Location = new System.Drawing.Point(6, 189);
+            this.lblMovimiento.Name = "lblMovimiento";
+            this.lblMovimiento.Size = new System.Drawing.Size(144, 13);
+            this.lblMovimiento.TabIndex = 78;
+            this.lblMovimiento.Text = "Movimientos Recomendados";
             // 
             // nUDtropas
             // 
-            this.nUDtropas.Location = new System.Drawing.Point(19, 132);
+            this.nUDtropas.Location = new System.Drawing.Point(18, 114);
             this.nUDtropas.Name = "nUDtropas";
             this.nUDtropas.Size = new System.Drawing.Size(120, 20);
             this.nUDtropas.TabIndex = 70;
             this.nUDtropas.ValueChanged += new System.EventHandler(this.nUDtropas_ValueChanged);
             // 
+            // btnBestMovement
+            // 
+            this.btnBestMovement.Location = new System.Drawing.Point(18, 217);
+            this.btnBestMovement.Name = "btnBestMovement";
+            this.btnBestMovement.Size = new System.Drawing.Size(133, 23);
+            this.btnBestMovement.TabIndex = 77;
+            this.btnBestMovement.Text = "Mostrar";
+            this.btnBestMovement.UseVisualStyleBackColor = true;
+            this.btnBestMovement.Click += new System.EventHandler(this.btnBestMovement_Click);
+            // 
             // txtPaisSeleccionado
             // 
-            this.txtPaisSeleccionado.Location = new System.Drawing.Point(16, 59);
+            this.txtPaisSeleccionado.Location = new System.Drawing.Point(15, 33);
             this.txtPaisSeleccionado.Name = "txtPaisSeleccionado";
+            this.txtPaisSeleccionado.ReadOnly = true;
             this.txtPaisSeleccionado.Size = new System.Drawing.Size(122, 20);
             this.txtPaisSeleccionado.TabIndex = 69;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(19, 170);
+            this.button1.Location = new System.Drawing.Point(43, 142);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 71;
@@ -706,22 +721,24 @@
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(9, 47);
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(10, 167);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 17);
+            this.label7.Size = new System.Drawing.Size(50, 22);
             this.label7.TabIndex = 74;
-            this.label7.Text = "Fase";
+            this.label7.Text = "Fase:";
             // 
             // lblAsignamiento
             // 
             this.lblAsignamiento.AutoSize = true;
             this.lblAsignamiento.BackColor = System.Drawing.Color.Transparent;
-            this.lblAsignamiento.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAsignamiento.Location = new System.Drawing.Point(57, 47);
+            this.lblAsignamiento.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAsignamiento.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblAsignamiento.Location = new System.Drawing.Point(57, 168);
             this.lblAsignamiento.Name = "lblAsignamiento";
-            this.lblAsignamiento.Size = new System.Drawing.Size(0, 17);
+            this.lblAsignamiento.Size = new System.Drawing.Size(43, 22);
             this.lblAsignamiento.TabIndex = 75;
+            this.lblAsignamiento.Text = "ddd";
             // 
             // timer1
             // 
@@ -731,32 +748,45 @@
             // ckBAutoTraining
             // 
             this.ckBAutoTraining.AutoSize = true;
-            this.ckBAutoTraining.Location = new System.Drawing.Point(12, 411);
+            this.ckBAutoTraining.Location = new System.Drawing.Point(21, 477);
             this.ckBAutoTraining.Name = "ckBAutoTraining";
             this.ckBAutoTraining.Size = new System.Drawing.Size(150, 17);
             this.ckBAutoTraining.TabIndex = 76;
             this.ckBAutoTraining.Text = "Entrenamiento Automatico";
             this.ckBAutoTraining.UseVisualStyleBackColor = true;
             // 
-            // btnBestMovement
+            // label8
             // 
-            this.btnBestMovement.Location = new System.Drawing.Point(41, 454);
-            this.btnBestMovement.Name = "btnBestMovement";
-            this.btnBestMovement.Size = new System.Drawing.Size(101, 23);
-            this.btnBestMovement.TabIndex = 77;
-            this.btnBestMovement.Text = "Mejores Movimiento";
-            this.btnBestMovement.UseVisualStyleBackColor = true;
-            this.btnBestMovement.Click += new System.EventHandler(this.btnBestMovement_Click);
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(36, 124);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 17);
+            this.label8.TabIndex = 78;
+            this.label8.Text = "Siguiente Fase";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Crimson;
+            this.label2.Location = new System.Drawing.Point(4, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(178, 26);
+            this.label2.TabIndex = 79;
+            this.label2.Text = "RISK SIMULATOR";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BackgroundImage = global::Juego_Risk.Properties.Resources.Mapa;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1173, 554);
-            this.Controls.Add(this.btnBestMovement);
+            this.ClientSize = new System.Drawing.Size(1166, 554);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.ckBAutoTraining);
             this.Controls.Add(this.lblAsignamiento);
             this.Controls.Add(this.label7);
@@ -765,7 +795,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lbljugadorname);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.Btn_Empezar);
             this.Controls.Add(this.Btn_NuevaGuinea);
             this.Controls.Add(this.Btn_Indonecia);
@@ -810,7 +839,9 @@
             this.Controls.Add(this.Btn_Alberta);
             this.Controls.Add(this.Btn_Groenlandia);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Risk Simulator";
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -867,7 +898,6 @@
         private System.Windows.Forms.Button Btn_NuevaGuinea;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox Btn_Empezar;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CB_vecinos;
@@ -884,6 +914,9 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox ckBAutoTraining;
         private System.Windows.Forms.Button btnBestMovement;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblMovimiento;
+        private System.Windows.Forms.Label label2;
     }
 }
 

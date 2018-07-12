@@ -90,6 +90,9 @@ namespace Juego_Risk
 
             btnBestMovement.Enabled = false;
             too_trip();
+            lblMovimiento.Visible = false;
+            btnBestMovement.Visible = false;
+
         }
         /// <summary>
         /// Metodo que reparte los territorios iniciales a cada jugador
@@ -250,6 +253,10 @@ namespace Juego_Risk
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Ataque";
                 btnBestMovement.Enabled = true;
+
+                lblMovimiento.Visible = true;
+                btnBestMovement.Visible = true;
+
             }
             else if (fase == 1)
             {
@@ -257,6 +264,14 @@ namespace Juego_Risk
                 panel1.Enabled = true;
                 lblAsignamiento.Text = "Reforzamiento";
                 btnBestMovement.Enabled = false;
+
+                //Limpia al pasar a otro movimiento
+                txtPaisSeleccionado.Text = string.Empty;
+                CB_vecinos.Items.Clear();
+                CB_vecinos.Text = string.Empty;
+                nUDtropas.Value = 0;
+                lblMovimiento.Visible = false;
+                btnBestMovement.Visible = false;
             }
             else if (fase == 2)
             {
@@ -264,10 +279,20 @@ namespace Juego_Risk
                 panel1.Enabled = false;
                 lblAsignamiento.Text = "Asignación";
                 btnBestMovement.Enabled = false;
+                lblMovimiento.Visible = false;
+                btnBestMovement.Visible = false;
+                
             }
             else
             {
-                 /*Turno de la IA*/
+                /*Turno de la IA*/
+                AutoClosingMessageBox.Show("Turno de la IA", "Inicio de Turno", 2000);
+
+                //Limpiar al pasar a otro movimiento
+                txtPaisSeleccionado.Text = string.Empty;
+                CB_vecinos.Items.Clear();
+                CB_vecinos.Text = string.Empty;
+                nUDtropas.Value = 0;
 
                 Btn_Empezar.Enabled = false;
                 panel1.Enabled = false;
@@ -590,8 +615,9 @@ namespace Juego_Risk
                     contador++;
                 }
                 else
-                {
+                {                    
                     lblAsignamiento.Text = "Ataque";
+                    AutoClosingMessageBox.Show("Inicia Fase de Ataque IA", "Ataque", 1200);
                     //Calculate posibilities attacks
                     playerIA.PredictAllAttacks(Tablero.IA);
 
@@ -609,6 +635,7 @@ namespace Juego_Risk
             }
             else if (lblAsignamiento.Text == "Ataque")
             {
+                
                 if (contador < auxtimer)
                 {
                     string countries = playerIA.Attacks.Dequeue();
@@ -635,8 +662,9 @@ namespace Juego_Risk
                     }
                 }
                 else
-                {
+                {            
                     lblAsignamiento.Text = "Reforzamiento";
+                    AutoClosingMessageBox.Show("Inicia Fase de Reforzamiento IA", "Reforzamiento", 1200);
                     playerIA.Reinforcement();
                     contador = 0;
 
@@ -668,7 +696,10 @@ namespace Juego_Risk
                     lbljugadorname.Text = Tablero.name;
                     Btn_Empezar.Enabled = true;
                     contador = 0;
-                    timer1.Enabled = false;         
+                    timer1.Enabled = false;
+
+                    //Aviso de inicio del juego
+                    AutoClosingMessageBox.Show("Turno del jugador: " + Tablero.name, "Inicio de Turno", 2000);
                 }
             }
 
@@ -731,7 +762,7 @@ namespace Juego_Risk
             auxtimer = 0;
 
             Singleton.Instance.CleanMap();
-            InitializeComponent();
+
             //variable que guarda el nombre del jugador
             // Ciclo que se encarga de verificar que ingresen un nombre
             do
@@ -790,6 +821,9 @@ namespace Juego_Risk
             panel1.Enabled = false;
             lblAsignamiento.Text = "Asignación";
             btnBestMovement.Enabled = false;
+            too_trip();
+            lblMovimiento.Visible = false;
+            btnBestMovement.Visible = false;
 
         }
 
@@ -810,5 +844,36 @@ namespace Juego_Risk
 
             MessageBox.Show("Mejores movimientos de ataque recomendados: \n\n" + message, "Fase de Ataque", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+    }
+
+    public class AutoClosingMessageBox
+    {
+        System.Threading.Timer _timeoutTimer;
+        string _caption;
+        AutoClosingMessageBox(string text, string caption, int timeout)
+        {
+            _caption = caption;
+            _timeoutTimer = new System.Threading.Timer(OnTimerElapsed,
+                null, timeout, System.Threading.Timeout.Infinite);
+            MessageBox.Show(text, caption);
+        }
+
+        public static void Show(string text, string caption, int timeout)
+        {
+            new AutoClosingMessageBox(text, caption, timeout);
+        }
+
+        void OnTimerElapsed(object state)
+        {
+            IntPtr mbWnd = FindWindow(null, _caption);
+            if (mbWnd != IntPtr.Zero)
+                SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            _timeoutTimer.Dispose();
+        }
+        const int WM_CLOSE = 0x0010;
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
     }
 }
