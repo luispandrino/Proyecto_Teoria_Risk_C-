@@ -26,17 +26,22 @@ namespace Juego_Risk
         int contador = 0;
         int auxtimer = 0;
 
-        public Form1()
+        public Form1(string aName)
         {
 
             InitializeComponent();
             //variable que guarda el nombre del jugador
             // Ciclo que se encarga de verificar que ingresen un nombre
-            do
-            {
-                nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre porfavor :", "Risk", ""));
-                lbljugadorname.Text = nombre;
-            } while (nombre == "") ;
+            //do
+            //{
+            //    nombre = Tablero.Nombre_jugador(Microsoft.VisualBasic.Interaction.InputBox("Ingrese su nombre porfavor :", "Risk", ""));
+            //    
+            //} while (nombre == "") ;
+
+            nombre = aName;
+            Tablero.Nombre_jugador(nombre);
+            lbljugadorname.Text = nombre;
+
 
             //Diccionario con los botones que representan a cada pais
             Listbtn.Add(1, Btn_Afganistan);
@@ -844,6 +849,11 @@ namespace Juego_Risk
             }
 
             MessageBox.Show("Mejores movimientos de ataque recomendados: \n\n" + message, "Fase de Ataque", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

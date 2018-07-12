@@ -843,6 +843,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Risk Simulator";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Empezar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
