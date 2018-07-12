@@ -744,7 +744,16 @@ namespace Juego_Risk.UtilitiesClass
             int cantidad = Convert.ToInt16(Math.Round(ter * 0.33,0));
             double suma = 0;
             int t = tropas;
-            List<Pais> paises_escojer = world.Lista_Paises;
+            List<Pais> paises_escojer = new List<Pais>();
+            for (int i = 0; i < world.Lista_Paises.Count; i++)
+            {
+                if (world.Lista_Paises[i].Pertenencia == 2)
+                {
+                    paises_escojer.Add(world.Lista_Paises[i]);
+                }
+
+            }
+
             paises_escojer = paises_escojer.OrderByDescending(p => p.P_Asig).ToList();
             for (int i = 0; i < cantidad; i++)
             {
