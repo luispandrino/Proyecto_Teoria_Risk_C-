@@ -229,3 +229,4 @@ C:\Users\bryan\OneDrive\Documents\GitHub\Risk V7.0\Proyecto_Teoria_Risk_C-\Juego
 C:\Users\bryan\OneDrive\Documents\GitHub\Risk V7.0\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.exe
 C:\Users\bryan\OneDrive\Documents\GitHub\Risk V7.0\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.pdb
 C:\Users\ASUS\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form2.resources
+C:\Users\Usuario\Documents\GitHub\Proyecto_Teoria_Risk_C-\Juego_Risk\obj\Debug\Juego_Risk.Form2.resources
