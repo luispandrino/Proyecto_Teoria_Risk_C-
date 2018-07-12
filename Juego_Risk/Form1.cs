@@ -697,6 +697,7 @@ namespace Juego_Risk
                     Btn_Empezar.Enabled = true;
                     contador = 0;
                     timer1.Enabled = false;
+                    lblASignar.Text = Tablero.tropaAsigamiento.ToString();
 
                     //Aviso de inicio del juego
                     AutoClosingMessageBox.Show("Turno del jugador: " + Tablero.name, "Inicio de Turno", 2000);
